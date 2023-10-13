@@ -129,12 +129,13 @@ body {
   flex-direction: column;
   margin-left: 32px;
 }
-.discount_cart p {
+.use_cart_title {
   font-size: 40px;
   font-weight: bold;
   margin-left: 0px;
   margin-top: 33px;
 }
+
 .discount_cart_img {
   margin-left: 0px;
   margin-top: 22px;
@@ -144,14 +145,45 @@ body {
   font-weight: bold;
   margin-top: 0px;
 }
+.more_benefit_title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+.discount_cart_btn {
+  margin-top: 294px;
+  margin-right: 48px;
+}
+.discount_cart_btn a {
+  background-color: #86bbd8;
+  text-decoration: none;
+  border-radius: 10px;
+  color: black;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 20px;
+}
+.discount_cart_btn a:hover {
+  background-color: rgb(38, 38, 38);
+  color: #86bbd8;
+  transition: 0.3s;
+}
 /*preview_block*/
 .preview_block {
   margin-top: 116px;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 1000px;
+  width: 100%;
   min-height: 736px;
+  background: url(img/preview_block_back.svg);
+}
+.preview_cart_block {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .preview_cart {
   margin-top: 100px;
@@ -162,6 +194,7 @@ body {
   font-size: 22px;
   font-weight: bold;
   height: 460px;
+  margin-left: 10px;
 }
 .preview_cart p {
   margin-top: 19px;
