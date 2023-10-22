@@ -310,8 +310,12 @@ body {
   gap: 35px;
   margin-bottom: 146px;
 }
+.auth_block p {
+  font-size: 50px;
+  font-weight: bold;
+}
 
-.auth_block input {
+.input_text {
   min-height: 40px;
   width: 40%;
   background-color: #545454;
@@ -319,7 +323,7 @@ body {
   border-radius: 10px;
   border: none;
 }
-.auth_block button {
+.auth_btn {
   width: 40%;
   min-height: 40px;
   background-color: #86bbd8;
@@ -328,6 +332,11 @@ body {
   font-weight: 00;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
+}
+.auth_btn:hover {
+  color: #86bbd8;
+  background-color: rgb(38, 38, 38);
 }
 .auth_block {
   width: 58%;
@@ -345,4 +354,68 @@ body {
   text-align: center;
   margin-bottom: 40px;
   padding-top: 10px;
+}
+.auth_block a:hover {
+  color: #86bbd8;
+  background-color: rgb(38, 38, 38);
+}
+
+/*registration*/
+.registration_block {
+  width: 47%;
+  min-height: 900px;
+  background-color: #222222;
+  margin-top: 100px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-bottom: 146px;
+}
+.registration_block p {
+  font-size: 50px;
+  font-weight: bold;
+}
+.input_text {
+  min-height: 40px;
+  width: 40%;
+  background-color: #545454;
+  font-size: 30px;
+  border-radius: 10px;
+  border: none;
+}
+
+.registration_btn {
+  width: 40%;
+  min-height: 40px;
+  background-color: #f26419;
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.registration_btn:hover {
+  color: #f26419;
+  background-color: white;
+}
+.span_check_password {
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  width: 300px;
+  margin-top: -25px;
+}
+label {
+  cursor: pointer;
+  margin-left: 5px;
+  width: 100px;
+}
+.input_account {
+  margin-top: -25px;
+}
+.input_account a {
+  padding-left: 10px;
+  color: #86bbd8;
 }
