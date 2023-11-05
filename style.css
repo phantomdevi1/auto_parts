@@ -6,6 +6,15 @@
   font-family: Inter;
   transition: 0.3s;
 }
+::-webkit-input-placeholder {
+  font-size: 16px;
+}
+:-ms-input-placeholder {
+  font-size: 16px;
+}
+::placeholder {
+  font-size: 20px;
+}
 
 body {
   background-color: #141414;
@@ -380,7 +389,7 @@ body {
   min-height: 40px;
   width: 40%;
   background-color: #545454;
-  font-size: 30px;
+  font-size: 20px;
   border-radius: 10px;
   border: none;
 }
