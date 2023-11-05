@@ -46,7 +46,8 @@
       </form>
     </div>
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {   
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {   
 
     $host = "localhost";
     $user = "root";
@@ -56,7 +57,8 @@
     $dsn = "mysql:host=$host;dbname=$database";
     $conn = mysqli_connect($host, $user, $pass, $database);
 
-    if (!$conn) {
+    if (!$conn)
+    {
       die("Ошибка подключения к базе данных: " . mysqli_connect_error());
     }
     $login = $_POST['username'];
@@ -64,16 +66,20 @@
     $query = "SELECT * FROM users WHERE user_email = '$login' AND user_password = '$pass'";
     $result = mysqli_query($conn, $query);
 
-    if (mysqli_num_rows($result) > 0) 
+    if (mysqli_num_rows($result) > 0)
     {
-      echo '<script>alert("Добро");</script>';
-    } 
+      $row = mysqli_fetch_assoc($result);
+      session_start(); 
+      $_SESSION['user_id'] = $row['ID'];
+      header("Location: profile.php#profile_block"); 
+      exit;
+    }  
     else 
     {
       echo '<script>alert("Неверный логин или пароль");</script>';
     }
   mysqli_close($conn);
-}
+  }
 ?>
     
     <script>
