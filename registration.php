@@ -14,13 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["user_name"];
     $userpass = $_POST["user_password"];
 
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $database = "auto_parts";
-
-    $dsn = "mysql:host=$host;dbname=$database";
-    $conn = mysqli_connect($host, $user, $pass, $database);
+    include 'config.php';
 
     // Проверка соединения
     if (!$conn) {
@@ -49,9 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header class="header_index">
       <h1 class="heading_text">РЕГИСТРАЦИЯ</h1>
       <div class="toolbar">
-        <a href="catalog.html">КАТАЛОГ</a>
+        <a href="catalog.php">КАТАЛОГ</a>
         <a href="">КОРЗИНА</a>
-        <a href="">ОТЗЫВЫ</a>
+        <a href="reviews.php">ОТЗЫВЫ</a>
         <a href="">КОНТАКТЫ</a>
         <a href="auth.php#section_auth" class="last">ПРОФИЛЬ</a>
       </div>

@@ -17,12 +17,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$database = "auto_parts";
-
-$conn = mysqli_connect($host, $user, $pass, $database);
+include 'config.php';
 
 if (!$conn) {
     die("Ошибка подключения к базе данных: " . mysqli_connect_error());
@@ -55,9 +50,9 @@ mysqli_close($conn);
 <header class="header_index">
     <h1 class="heading_text">ПРОФИЛЬ</h1>
     <div class="toolbar">
-        <a href="catalog.html">КАТАЛОГ</a>
+        <a href="catalog.php">КАТАЛОГ</a>
         <a href="">КОРЗИНА</a>
-        <a href="">ОТЗЫВЫ</a>
+        <a href="reviews.php">ОТЗЫВЫ</a>
         <a href="">КОНТАКТЫ</a>
         <a href="profile.php" class="last">ПРОФИЛЬ</a>
     </div>

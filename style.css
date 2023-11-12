@@ -532,3 +532,173 @@ hr {
 .order_profile a:hover {
   transform: scale(1.05);
 }
+
+/* category */
+.heading_text_category {
+  margin-top: 282px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 120px;
+  text-transform: uppercase;
+}
+.content_category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px; /* Максимальная ширина контейнера */
+  margin: 0 auto; /* Центрирование контейнера */
+  margin-top: 100px;
+}
+
+.block_category {
+  max-width: 300px; /* Отнимаем отступы между блоками */
+  margin-bottom: 50px; /* Отступ между строками */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: left;
+}
+
+.block_category img {
+  width: 100%;
+  min-height: 293px;
+  border-radius: 10px;
+}
+.block_category_count {
+  margin-top: 10px;
+  color: #f26419;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 0;
+}
+.block_category_name {
+  color: #86bbd8;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 0;
+}
+.block_category_description {
+  margin-top: 10px;
+  color: #86bbd8;
+  font-size: 20px;
+  font-weight: 500;
+}
+.block_category_btn {
+  width: 100%;
+  height: 44px;
+  background-color: #86bbd8;
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  margin-top: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.block_category_btn:hover {
+  background-color: #f26419;
+  color: white;
+}
+
+/* reviews */
+.content_reviews {
+  margin-top: 100px;
+  max-width: 1500px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.rewiews_block {
+  width: 690px;
+  min-height: 350px;
+  background-color: #0d0d0d;
+  border-radius: 10px;
+  margin-bottom: 160px;
+  margin-right: 40px;
+}
+.name_block {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.name_name_block {
+  color: #f26419;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
+.estimation_name_block {
+  font-size: 32px;
+  color: #86bbd8;
+  font-weight: bold;
+  margin: 0;
+}
+.rewiew_text {
+  font-size: 32px;
+  color: #f6ae2d;
+  font-weight: 300;
+  margin-top: 34px;
+  margin-left: 17px;
+}
+.write_rewiew {
+  width: 100%;
+  background-color: #f6ae2d;
+  height: 600px;
+}
+.write_rewiew {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.title_write_rewiew {
+  color: black;
+  font-size: 60px;
+  font-weight: bold;
+  margin-top: 38px;
+}
+.write_rewiew_estimation {
+  display: inline-flex;
+  margin-top: 38px;
+}
+.write_rewiew_estimation p {
+  color: black;
+  font-size: 32px;
+  font-weight: bold;
+}
+.write_rewiew_estimation select {
+  font-size: 25px;
+  margin-left: 44px;
+  border-radius: 10px;
+  width: 75px;
+  height: 50px;
+  padding-left: 20px;
+}
+.input_rewiew {
+  width: 42%;
+  height: 43%;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 20px;
+}
+.submit_rewiew {
+  width: 44.5%;
+  height: 78px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.submit_rewiew:hover {
+  background-color: #fff;
+  color: black;
+}
