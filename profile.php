@@ -48,6 +48,7 @@ mysqli_close($conn);
 ?>
 
 <header class="header_index">
+<img src="img/logo.svg" alt="">
     <h1 class="heading_text">ПРОФИЛЬ</h1>
     <div class="toolbar">
         <a href="catalog.php">КАТАЛОГ</a>

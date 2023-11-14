@@ -33,7 +33,7 @@ CREATE TABLE `cart` (
   `product_id` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `date_added` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,7 @@ CREATE TABLE `cart` (
 CREATE TABLE `category` (
   `ID` int NOT NULL,
   `category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `category`
@@ -71,7 +71,7 @@ CREATE TABLE `product` (
   `price` decimal(10,2) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `category` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `product`
@@ -106,7 +106,7 @@ CREATE TABLE `reviews` (
   `rating` int DEFAULT NULL,
   `review_text` text,
   `submission_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `reviews`
@@ -133,7 +133,7 @@ CREATE TABLE `users` (
   `user_name` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `access_status` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `users`

@@ -8,6 +8,7 @@
   </head>
   <body>
     <header class="header_index">
+    <img src="img/logo.svg" alt="">
       <h1 class="heading_text">АВТОРИЗАЦИЯ</h1>
       <div class="toolbar">
         <a href="catalog.php">КАТАЛОГ</a>

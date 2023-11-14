@@ -29,10 +29,10 @@ body {
   flex-direction: column;
 }
 .heading_text {
-  margin-top: 282px;
+  margin-top: 100px;
   color: #ffffff;
   font-weight: bold;
-  font-size: 200px;
+  font-size: 130px;
 }
 .toolbar {
   margin-top: 56px;
@@ -535,7 +535,7 @@ hr {
 
 /* category */
 .heading_text_category {
-  margin-top: 282px;
+  margin-top: 100px;
   color: #ffffff;
   font-weight: bold;
   font-size: 120px;
@@ -552,17 +552,40 @@ hr {
 }
 
 .block_category {
-  max-width: 300px; /* Отнимаем отступы между блоками */
-  margin-bottom: 50px; /* Отступ между строками */
+  max-width: 300px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   height: 100%;
   text-align: left;
+  overflow: hidden; /* Hide overflowing content */
 }
 
+.block_category_description {
+  margin-top: 10px;
+  color: #86bbd8;
+  font-size: 20px;
+  font-weight: 500;
+  max-height: 60px; /* Set a maximum height for the description */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+.read-more-link {
+  color: #f26419;
+  text-decoration: underline;
+  cursor: pointer;
+  display: none; /* Initially hide the "Read More" link */
+}
+
+.read-more-link.active {
+  display: inline; /* Display the "Read More" link when active */
+}
+
+
 .block_category img {
-  width: 100%;
-  min-height: 293px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover; /* Чтобы изображение сохраняло пропорции и занимало всю площадь блока */
   border-radius: 10px;
 }
 .block_category_count {
@@ -577,13 +600,11 @@ hr {
   font-size: 24px;
   font-weight: bold;
   margin-left: 0;
+  white-space: nowrap; /* Запрет на перенос текста на новую строку */
+  overflow: hidden; /* Скрытие части текста, выходящей за границы блока */
+  text-overflow: ellipsis; /* Замена скрытой части текста на многоточие */
 }
-.block_category_description {
-  margin-top: 10px;
-  color: #86bbd8;
-  font-size: 20px;
-  font-weight: 500;
-}
+
 .block_category_btn {
   width: 100%;
   height: 44px;
@@ -611,7 +632,7 @@ hr {
 }
 
 .rewiews_block {
-  width: 690px;
+  width: 500px;
   min-height: 350px;
   background-color: #0d0d0d;
   border-radius: 10px;
