@@ -558,7 +558,7 @@ hr {
   flex-direction: column;
   height: 100%;
   text-align: left;
-  overflow: hidden; /* Hide overflowing content */
+  overflow: hidden;
 }
 
 .block_category_description {
@@ -578,9 +578,8 @@ hr {
 }
 
 .read-more-link.active {
-  display: inline; /* Display the "Read More" link when active */
+  display: contents; /* Display the "Read More" link when active */
 }
-
 
 .block_category img {
   width: 300px;
@@ -603,6 +602,17 @@ hr {
   white-space: nowrap; /* Запрет на перенос текста на новую строку */
   overflow: hidden; /* Скрытие части текста, выходящей за границы блока */
   text-overflow: ellipsis; /* Замена скрытой части текста на многоточие */
+}
+.quantity_category {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  font-size: 17px;
+  margin-left: 5px;
+  background-color: #141414;
+  color: #f26419;
+  text-align: center;
 }
 
 .block_category_btn {
@@ -722,4 +732,108 @@ hr {
 .submit_rewiew:hover {
   background-color: #fff;
   color: black;
+}
+
+/* basket */
+.content_basket {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price_basket {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.price_basket p {
+  font-size: 60px;
+  font-weight: bold;
+  color: #fff;
+  margin-right: 20px;
+}
+
+.price_basket span {
+  font-size: 60px;
+  font-weight: bold;
+  color: #f26419;
+}
+
+.basket_cart {
+  width: 80%;
+  background-color: #0d0d0d;
+  border-radius: 10px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.basket_cart_img {
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+  margin-left: 20px; /* Отступ слева */
+}
+
+.info_basket_cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  flex: 1;
+}
+
+.quantity_basket_cart {
+  width: 76px;
+  height: 40px;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nametovar_basket {
+  font-size: 20px;
+  font-weight: bold;
+  color: #86bbd8;
+  max-width: 360px;
+}
+
+.fullprice_tovar {
+  font-size: 30px;
+  font-weight: bold;
+  color: #f26419;
+}
+
+.delete_button {
+  background: url(img/delete_btn.svg) no-repeat;
+  width: 48px;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+}
+
+.submit_order_btn {
+  margin-top: 20px;
+  width: 100vh;
+  height: 60px;
+  margin-bottom: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  background-color: #86bbd8;
+  font-size: 20px;
+  font-weight: bold;
+}
+.submit_order_btn:hover {
+  color: #86bbd8;
+  background-color: black;
 }
