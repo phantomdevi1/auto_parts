@@ -23,7 +23,7 @@ if (!$conn) {
     die("Ошибка подключения к базе данных: " . mysqli_connect_error());
 }
 
-$query = "SELECT user_name, user_email, user_phone FROM users WHERE ID = $user_id";
+$query = "SELECT user_name, user_email, user_phone, discount_card FROM users WHERE ID = $user_id";
 $result = mysqli_query($conn, $query);
 
 if ($result && mysqli_num_rows($result) > 0) 
@@ -32,8 +32,10 @@ if ($result && mysqli_num_rows($result) > 0)
     $user_name = $row['user_name'];
     $user_email = $row['user_email'];
     $user_phone = $row['user_phone'];
+    $discount_card_status = $row['discount_card'] == 1 ? 'активна' : 'не активна';
 } 
 else {
+    // Handle the case where user data is not found
 }
 
 // Функция для выхода из профиля
@@ -48,7 +50,7 @@ mysqli_close($conn);
 ?>
 
 <header class="header_index">
-<img src="img/logo.svg" alt="">
+    <img src="img/logo.svg" alt="">
     <h1 class="heading_text">ПРОФИЛЬ</h1>
     <div class="toolbar">
         <a href="catalog.php">КАТАЛОГ</a>
@@ -67,7 +69,7 @@ mysqli_close($conn);
             <button class="exit_profile" name="logout">Выйти</button>
         </form>
         <img class="img_profile_card" src="img/discount_cart.svg" alt="">
-        <p class="status_discount_card">активна</p>
+        <p class="status_discount_card"><?php echo $discount_card_status; ?></p>
     </div>
     <div class="profile_block_right">
         <p class="title_info_profile">Информация</p>

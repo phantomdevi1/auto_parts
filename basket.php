@@ -5,6 +5,17 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
+    // Получаем информацию о дисконтной карте пользователя
+    $queryDiscount = "SELECT discount_card FROM users WHERE ID = $user_id";
+    $resultDiscount = mysqli_query($conn, $queryDiscount);
+
+    if ($resultDiscount && mysqli_num_rows($resultDiscount) > 0) {
+        $rowDiscount = mysqli_fetch_assoc($resultDiscount);
+        $user_has_discount_card = $rowDiscount['discount_card'];
+    } else {
+        $user_has_discount_card = 0; // По умолчанию предполагаем, что у пользователя нет дисконтной карты
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_order'])) {
         // Создаем заказ
         $createOrderQuery = "INSERT INTO orders (user_id, order_date, status) VALUES ($user_id, NOW(), 'В обработке')";
@@ -107,6 +118,7 @@ if (isset($_SESSION['user_id'])) {
 
             <script>
                 document.getElementById('total_price').textContent = '<?php echo $totalPrice; ?> ₽';
+
                 function updateTotal(cartId, price) {
                     var quantity = document.getElementById('quantity_' + cartId).value;
                     var total = quantity * price;
@@ -117,13 +129,25 @@ if (isset($_SESSION['user_id'])) {
                 function updateTotalPrice() {
                     var totalPrice = 0;
                     var cartItems = document.querySelectorAll('.basket_cart');
+
                     cartItems.forEach(function (item) {
                         var price = parseFloat(item.querySelector('.fullprice_tovar').textContent);
                         totalPrice += price;
                     });
-                    document.getElementById('total_price').textContent = totalPrice + ' ₽';
+
+                    // Проверяем, есть ли у пользователя дисконтная карта
+                    var hasDiscountCard = <?php echo $user_has_discount_card; ?>;
+
+                    // Применяем скидку 3%, если у пользователя есть дисконтная карта
+                    if (hasDiscountCard) {
+                        var discount = 0.03; // 3%
+                        totalPrice -= totalPrice * discount;
+                    }
+
+                    document.getElementById('total_price').textContent = totalPrice.toFixed(2) + ' ₽';
                 }
             </script>
+
         </body>
         </html>
         <?php
