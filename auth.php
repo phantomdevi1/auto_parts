@@ -12,7 +12,7 @@
       <h1 class="heading_text">АВТОРИЗАЦИЯ</h1>
       <div class="toolbar">
         <a href="catalog.php">КАТАЛОГ</a>
-        <a href="">КОРЗИНА</a>
+        <a href="basket.php">КОРЗИНА</a>
         <a href="reviews.php">ОТЗЫВЫ</a>
         <a href="">КОНТАКТЫ</a>
         <a href="auth.php" class="last">ПРОФИЛЬ</a>

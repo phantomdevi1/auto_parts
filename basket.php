@@ -36,6 +36,12 @@ if (isset($_SESSION['user_id'])) {
             $resultProductPrice = mysqli_stmt_get_result($stmtProductPrice);
         
             $productPrice = mysqli_fetch_assoc($resultProductPrice)['price'];
+            
+            // Применяем скидку, если у пользователя есть дисконтная карта
+            if ($user_has_discount_card == 1) {
+                $productPrice *= 0.97; // 3% скидка
+            }
+            
             $totalPrice += $productPrice * $quantity;
         }
         
@@ -151,24 +157,34 @@ if (isset($_SESSION['user_id'])) {
             </form>
 
             <script>
-                document.getElementById('total_price').textContent = '<?php echo $totalPrice; ?> ₽';
-                function updateTotal(cartId, price) {
-                    var quantity = document.getElementById('quantity_' + cartId).value;
-                    var total = quantity * price;
-                    document.getElementById('fullprice_' + cartId).textContent = total + ' ₽';
-                    updateTotalPrice();
+               document.addEventListener('DOMContentLoaded', function () {
+            updateTotalPrice(); // Вызываем функцию при загрузке страницы
+
+            function updateTotal(cartId, price) {
+                var quantity = document.getElementById('quantity_' + cartId).value;
+                var total = quantity * price;
+                document.getElementById('fullprice_' + cartId).textContent = total + ' ₽';
+                updateTotalPrice();
+            }
+
+            function updateTotalPrice() {
+                var totalPrice = 0;
+                var cartItems = document.querySelectorAll('.basket_cart');
+
+                cartItems.forEach(function (item) {
+                    var price = parseFloat(item.querySelector('.fullprice_tovar').textContent);
+                    totalPrice += price;
+                });
+
+                // Применяем скидку, если у пользователя есть дисконтная карта
+                if (<?php echo $user_has_discount_card; ?> == 1) {
+                    totalPrice *= 0.97; // 3% скидка
                 }
 
-                function updateTotalPrice() {
-                    var totalPrice = 0;
-                    var cartItems = document.querySelectorAll('.basket_cart');
-
-                    cartItems.forEach(function (item) {
-                        var price = parseFloat(item.querySelector('.fullprice_tovar').textContent);
-                        totalPrice += price;
-                    });
-                    document.getElementById('total_price').textContent = totalPrice + ' ₽';
-                }
+                // Отображаем общую стоимость с двумя знаками после запятой
+                document.getElementById('total_price').textContent = totalPrice.toFixed(2) + ' ₽';
+            }
+        });
             </script>
 
         </body>

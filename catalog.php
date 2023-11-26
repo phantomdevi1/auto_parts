@@ -16,7 +16,7 @@ $user_id = $_SESSION['user_id'];
       <h1 class="heading_text">КАТАЛОГ</h1>
       <div class="toolbar">
         <a href="catalog.php">КАТАЛОГ</a>
-        <a href="">КОРЗИНА</a>
+        <a href="basket.php">КОРЗИНА</a>
         <a href="reviews.php">ОТЗЫВЫ</a>
         <a href="">КОНТАКТЫ</a>
         <a href="profile.php" class="last">ПРОФИЛЬ</a>

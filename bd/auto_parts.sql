@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 26 2023 г., 18:43
+-- Время создания: Ноя 26 2023 г., 19:39
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -34,6 +34,14 @@ CREATE TABLE `cart` (
   `quantity` int NOT NULL,
   `date_added` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `date_added`) VALUES
+(66, 1, 2, 1, '2023-11-26 16:38:35'),
+(67, 1, 2, 4, '2023-11-26 16:38:52');
 
 -- --------------------------------------------------------
 
@@ -81,7 +89,10 @@ INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status`, `full_price
 (24, 1, '2023-11-26 15:27:02', 'В обработке', 34000),
 (25, 1, '2023-11-26 15:27:33', 'В обработке', 4020),
 (26, 1, '2023-11-26 15:33:36', 'В обработке', 1400),
-(27, 1, '2023-11-26 15:38:29', 'В обработке', 99490);
+(27, 1, '2023-11-26 15:38:29', 'В обработке', 99490),
+(28, 1, '2023-11-26 15:46:44', 'В обработке', 8500),
+(29, 1, '2023-11-26 16:15:21', 'В обработке', 25500),
+(30, 1, '2023-11-26 16:31:46', 'В обработке', 8245);
 
 -- --------------------------------------------------------
 
@@ -110,7 +121,10 @@ INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `quantity`) VALU
 (28, 27, 4, 3),
 (29, 27, 8, 3),
 (30, 27, 10, 1),
-(31, 27, 11, 4);
+(31, 27, 11, 4),
+(32, 28, 2, 1),
+(33, 29, 2, 3),
+(34, 30, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -186,17 +200,19 @@ CREATE TABLE `users` (
   `user_phone` varchar(255) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
-  `access_status` int NOT NULL
+  `access_status` int NOT NULL,
+  `discount_card` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`ID`, `user_email`, `user_phone`, `user_name`, `user_password`, `access_status`) VALUES
-(1, 'admin@mail.ru', '88888888888', 'admin', 'admin', 1),
-(4, 'gruzdev_ilya16@mail.ru', '89607092738', 'Илья', '1234', 0),
-(5, 'qwerty@mail.ru', '89053451234', 'qwerty', '1234', 0);
+INSERT INTO `users` (`ID`, `user_email`, `user_phone`, `user_name`, `user_password`, `access_status`, `discount_card`) VALUES
+(1, 'admin@mail.ru', '88888888888', 'admin', 'admin', 1, 1),
+(4, 'gruzdev_ilya16@mail.ru', '89607092738', 'Илья', '1234', 0, 0),
+(5, 'qwerty@mail.ru', '89053451234', 'qwerty', '1234', 0, 0),
+(6, 'grand.as@mail.com', '89913530259', 'Den', '12345', 0, 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -258,7 +274,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -270,13 +286,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
@@ -294,7 +310,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

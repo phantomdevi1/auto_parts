@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <h1 class="heading_text">РЕГИСТРАЦИЯ</h1>
       <div class="toolbar">
         <a href="catalog.php">КАТАЛОГ</a>
-        <a href="">КОРЗИНА</a>
+        <a href="basket.php">КОРЗИНА</a>
         <a href="reviews.php">ОТЗЫВЫ</a>
         <a href="">КОНТАКТЫ</a>
         <a href="auth.php#section_auth" class="last">ПРОФИЛЬ</a>
