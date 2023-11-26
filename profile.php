@@ -86,8 +86,7 @@ mysqli_close($conn);
             <p class="title_info_profile">Заказы</p>
             <hr>
             <div class="order_profile">
-                <a href=""><img src="img/actual_order.svg" alt=""></a>
-                <a href=""><img src="img/history_order.svg" alt=""></a>
+                <a href="orders.php"><img src="img/actual_order.svg" alt=""></a>
             </div>
         </div>
     </div>

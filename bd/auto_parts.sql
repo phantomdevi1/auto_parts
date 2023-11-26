@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 12 2023 г., 20:08
+-- Время создания: Ноя 26 2023 г., 18:43
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -31,9 +31,9 @@ CREATE TABLE `cart` (
   `cart_id` int NOT NULL,
   `user_id` int DEFAULT NULL,
   `product_id` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
+  `quantity` int NOT NULL,
   `date_added` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,7 @@ CREATE TABLE `cart` (
 CREATE TABLE `category` (
   `ID` int NOT NULL,
   `category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `category`
@@ -61,6 +61,60 @@ INSERT INTO `category` (`ID`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `order_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` varchar(255) DEFAULT NULL,
+  `full_price` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status`, `full_price`) VALUES
+(17, 1, '2023-11-26 13:59:15', 'Готов к получению', 8800),
+(24, 1, '2023-11-26 15:27:02', 'В обработке', 34000),
+(25, 1, '2023-11-26 15:27:33', 'В обработке', 4020),
+(26, 1, '2023-11-26 15:33:36', 'В обработке', 1400),
+(27, 1, '2023-11-26 15:38:29', 'В обработке', 99490);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `item_id` int NOT NULL,
+  `order_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `order_items`
+--
+
+INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `quantity`) VALUES
+(15, 17, 12, 1),
+(23, 24, 2, 4),
+(24, 25, 6, 3),
+(25, 25, 7, 3),
+(26, 26, 7, 4),
+(27, 27, 2, 3),
+(28, 27, 4, 3),
+(29, 27, 8, 3),
+(30, 27, 10, 1),
+(31, 27, 11, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `product`
 --
 
@@ -71,7 +125,7 @@ CREATE TABLE `product` (
   `price` decimal(10,2) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `category` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `product`
@@ -106,7 +160,7 @@ CREATE TABLE `reviews` (
   `rating` int DEFAULT NULL,
   `review_text` text,
   `submission_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `reviews`
@@ -133,7 +187,7 @@ CREATE TABLE `users` (
   `user_name` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `access_status` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `users`
@@ -163,6 +217,21 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Индексы таблицы `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Индексы таблицы `product`
 --
 ALTER TABLE `product`
@@ -189,13 +258,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
   MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT для таблицы `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT для таблицы `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
@@ -225,6 +306,19 @@ ALTER TABLE `users`
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`),
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`ID`);
+
+--
+-- Ограничения внешнего ключа таблицы `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`);
+
+--
+-- Ограничения внешнего ключа таблицы `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`ID`);
 
 --
 -- Ограничения внешнего ключа таблицы `product`

@@ -837,3 +837,51 @@ hr {
   color: #86bbd8;
   background-color: black;
 }
+
+/* order */
+.content_order {
+  margin-top: 100px;
+}
+
+.card_order {
+  width: 72%;
+  background-color: #0d0d0d;
+  min-height: 363px;
+  margin-bottom: 100px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.info_card_order {
+  text-align: left;
+  margin-left: 44px;
+  margin-top: 58px;
+}
+
+.info_card_order div {
+  margin-bottom: 28px;
+}
+
+.info_card_order p,
+.info_card_order span {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  font-size: 22px;
+}
+
+.info_card_order p {
+  font-weight: 700;
+}
+
+.info_card_order span {
+  font-weight: 400;
+  margin-left: 10px; /* Отступ между p и span */
+}
+.img_card_order {
+  margin-right: 15px;
+  margin-top: 28px;
+}
+.img_card_order img {
+  border-radius: 10px;
+}
