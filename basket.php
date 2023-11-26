@@ -5,6 +5,17 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
+    // Получаем информацию о дисконтной карте пользователя
+    $queryDiscount = "SELECT discount_card FROM users WHERE ID = $user_id";
+    $resultDiscount = mysqli_query($conn, $queryDiscount);
+
+    if ($resultDiscount && mysqli_num_rows($resultDiscount) > 0) {
+        $rowDiscount = mysqli_fetch_assoc($resultDiscount);
+        $user_has_discount_card = $rowDiscount['discount_card'];
+    } else {
+        $user_has_discount_card = 0; // По умолчанию предполагаем, что у пользователя нет дисконтной карты
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_order'])) {
         $queryCartData = "SELECT product_id, quantity FROM cart WHERE user_id = ?";
         $stmtCartData = mysqli_prepare($conn, $queryCartData);
@@ -140,29 +151,23 @@ if (isset($_SESSION['user_id'])) {
             </form>
 
             <script>
-                function calculateTotalPrice() {
-                    var totalPrice = 0;
-                    var cartItems = document.querySelectorAll('.basket_cart');
-                    cartItems.forEach(function (item) {
-                        var price = parseFloat(item.querySelector('.fullprice_tovar').textContent);
-                        totalPrice += price;
-                    });
-
-                    // Обновляем общую стоимость в span
-                    var totalSpan = document.getElementById('total_price');
-                    totalSpan.textContent = totalPrice + ' ₽';
-                    totalSpan.dataset.total = totalPrice; // Обновляем значение в data-атрибуте
-                }
-
-                document.addEventListener("DOMContentLoaded", function () {
-                    calculateTotalPrice(); // Вызываем функцию при загрузке страницы
-                });
-
+                document.getElementById('total_price').textContent = '<?php echo $totalPrice; ?> ₽';
                 function updateTotal(cartId, price) {
                     var quantity = document.getElementById('quantity_' + cartId).value;
                     var total = quantity * price;
                     document.getElementById('fullprice_' + cartId).textContent = total + ' ₽';
-                    calculateTotalPrice(); 
+                    updateTotalPrice();
+                }
+
+                function updateTotalPrice() {
+                    var totalPrice = 0;
+                    var cartItems = document.querySelectorAll('.basket_cart');
+
+                    cartItems.forEach(function (item) {
+                        var price = parseFloat(item.querySelector('.fullprice_tovar').textContent);
+                        totalPrice += price;
+                    });
+                    document.getElementById('total_price').textContent = totalPrice + ' ₽';
                 }
             </script>
 

@@ -28,7 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("Пользователь с таким именем уже зарегистрирован.");</script>';
     } else {
         $accessstatus = 0;
-        $query = "INSERT INTO users (user_email, user_phone, user_name, user_password, access_status) VALUES ('$usermail', '$userphone', '$username', '$userpass', '$accessstatus')";
+        $discountcard = 0;
+        $query = "INSERT INTO users (user_email, user_phone, user_name, user_password, access_status, discount_card) VALUES ('$usermail', '$userphone', '$username', '$userpass', '$accessstatus', '$discountcard')";
         if (mysqli_query($conn, $query)) {
             echo '<script>alert("Вы зарегистрированы");</script>';
         } else {
