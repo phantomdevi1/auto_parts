@@ -26,15 +26,13 @@ if (!$conn) {
 $query = "SELECT user_name, user_email, user_phone, discount_card FROM users WHERE ID = $user_id";
 $result = mysqli_query($conn, $query);
 
-if ($result && mysqli_num_rows($result) > 0) 
-{
+if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $user_name = $row['user_name'];
     $user_email = $row['user_email'];
     $user_phone = $row['user_phone'];
     $discount_card_status = $row['discount_card'] == 1 ? 'активна' : 'не активна';
-} 
-else {
+} else {
     // Handle the case where user data is not found
 }
 
@@ -44,6 +42,33 @@ if (isset($_POST['logout'])) {
     session_destroy();
     header("Location: auth.php");
     exit;
+}
+
+// Обработка оформления скидочной карты
+if (isset($_POST['add_discount_card'])) {
+    $sql = "SELECT discount_card FROM users WHERE ID = $user_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $currentDiscountCardValue = $row['discount_card'];
+
+        if ($currentDiscountCardValue == 0) {
+            // Update the discount card value to 1 if it's not already issued
+            $updateSql = "UPDATE users SET discount_card = 1 WHERE ID = $user_id";
+            if ($conn->query($updateSql) === TRUE) {
+                // Обновляем статус после оформления карты
+                $discount_card_status = 'активна';
+                echo "<script>alert('Скидочная карта успешно оформлена.');</script>";
+            } else {
+                echo "<script>alert('Ошибка при оформлении скидочной карты: " . $conn->error . "');</script>";
+            }
+        } else {
+            echo "<script>alert('Скидочная карта уже оформлена.');</script>";
+        }
+    } else {
+        echo "<script>alert('Пользователь не найден.');</script>";
+    }
 }
 
 mysqli_close($conn);
@@ -70,6 +95,9 @@ mysqli_close($conn);
         </form>
         <img class="img_profile_card" src="img/discount_cart.svg" alt="">
         <p class="status_discount_card"><?php echo $discount_card_status; ?></p>
+        <form action="" method="post">
+        <button class="add_discount_card" name="add_discount_card" <?php echo $discount_card_status == 'активна' ? 'style="display:none;"' : ''; ?>>Оформить</button>
+        </form>    
     </div>
     <div class="profile_block_right">
         <p class="title_info_profile">Информация</p>

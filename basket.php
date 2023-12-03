@@ -45,7 +45,7 @@ if (isset($_SESSION['user_id'])) {
             $totalPrice += $productPrice * $quantity;
         }
         
-        // Сбрасываем указатель результата к началу
+        
         mysqli_data_seek($resultCartData, 0);
 
         // Создаем заказ
@@ -83,7 +83,7 @@ if (isset($_SESSION['user_id'])) {
             mysqli_stmt_execute($stmtClearCart);
 
             echo "<script>alert('Заказ успешно оформлен! Общая стоимость: $totalPrice ₽');</script>";            
-            exit();
+            
         } else {
             echo "Ошибка при создании заказа: " . mysqli_error($conn);
             exit();
@@ -182,7 +182,7 @@ if (isset($_SESSION['user_id'])) {
                 }
 
                 // Отображаем общую стоимость с двумя знаками после запятой
-                document.getElementById('total_price').textContent = totalPrice.toFixed(2) + ' ₽';
+                document.getElementById('total_price').textContent = totalPrice.toFixed(0) + ' ₽';
             }
         });
             </script>
