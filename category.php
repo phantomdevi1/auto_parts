@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <?php
+ <?php
   session_start();
   $user_id = $_SESSION['user_id'];
   if (isset($_GET['id'])) {
@@ -20,6 +11,15 @@
     echo "Категория не выбрана";
   }
   ?>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Категория</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
   <header class="header_index">
     <img src="img/logo.svg" alt="">
     <h1 class="heading_text_category">
@@ -34,12 +34,12 @@
       ?>
     </h1>
     <div class="toolbar">
-      <a href="catalog.php">КАТАЛОГ</a>
-      <a href="basket.php">КОРЗИНА</a>
-      <a href="reviews.php">ОТЗЫВЫ</a>
-      <a href="">КОНТАКТЫ</a>
-      <a href="profile.php" class="last">ПРОФИЛЬ</a>
-    </div>
+        <a href="index.html">ГЛАВНАЯ</a>
+        <a href="catalog.php">КАТАЛОГ</a>
+        <a href="basket.php">КОРЗИНА</a>
+        <a href="reviews.php">ОТЗЫВЫ</a>        
+        <a href="profile.php" class="last">ПРОФИЛЬ</a>
+      </div>
   </header>
   <div class="content_category">
   

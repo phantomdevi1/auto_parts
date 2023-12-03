@@ -78,12 +78,12 @@ mysqli_close($conn);
     <img src="img/logo.svg" alt="">
     <h1 class="heading_text">ПРОФИЛЬ</h1>
     <div class="toolbar">
+        <a href="index.html">ГЛАВНАЯ</a>
         <a href="catalog.php">КАТАЛОГ</a>
         <a href="basket.php">КОРЗИНА</a>
-        <a href="reviews.php">ОТЗЫВЫ</a>
-        <a href="">КОНТАКТЫ</a>
+        <a href="reviews.php">ОТЗЫВЫ</a>        
         <a href="profile.php" class="last">ПРОФИЛЬ</a>
-    </div>
+      </div>
 </header>
 
 <div class="content_profile" id="profile_block">

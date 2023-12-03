@@ -45,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <img src="img/logo.svg" alt="">
       <h1 class="heading_text">РЕГИСТРАЦИЯ</h1>
       <div class="toolbar">
+        <a href="index.html">ГЛАВНАЯ</a>
         <a href="catalog.php">КАТАЛОГ</a>
         <a href="basket.php">КОРЗИНА</a>
-        <a href="reviews.php">ОТЗЫВЫ</a>
-        <a href="">КОНТАКТЫ</a>
-        <a href="auth.php#section_auth" class="last">ПРОФИЛЬ</a>
+        <a href="reviews.php">ОТЗЫВЫ</a>        
+        <a href="profile.php" class="last">ПРОФИЛЬ</a>
       </div>
     </header>
     <form action="" method="POST">
