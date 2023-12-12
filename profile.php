@@ -88,7 +88,7 @@ mysqli_close($conn);
 
 <div class="content_profile" id="profile_block">
     <div class="profile_block_left">
-        <img src="img/default_ava.svg" alt="Аватарка" class="ava_img" width="90%">
+        <img src="img/default_ava.svg" alt="Аватарка" class="ava_img" width="90%" max-width="250px">
         <p class="name_profile"><?php echo $user_name; ?></p>
         <form method="post">
             <button class="exit_profile" name="logout">Выйти</button>

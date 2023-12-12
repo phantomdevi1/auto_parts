@@ -339,6 +339,7 @@ body {
 
 /*auth*/
 .auth_block {
+
   width: 47%;
   min-height: 1100px;
   background-color: #222222;
@@ -348,6 +349,10 @@ body {
   flex-direction: column;
   gap: 35px;
   margin-bottom: 146px;
+}
+.auth_block img{
+  max-width: 250px;
+  width: 50%;
 }
 .auth_block p {
   font-size: 50px;
@@ -400,6 +405,7 @@ body {
 }
 
 /*registration*/
+
 .registration_block {
   width: 47%;
   min-height: 900px;
@@ -410,6 +416,10 @@ body {
   flex-direction: column;
   gap: 35px;
   margin-bottom: 146px;
+}
+.registration_block img{
+  max-width: 250px;
+  width: 50%;
 }
 .registration_block p {
   font-size: 50px;
@@ -478,6 +488,7 @@ label {
 }
 .ava_img {
   margin-top: 7%;
+  max-width: 300px;
 }
 .name_profile {
   margin-top: 1.7%;
