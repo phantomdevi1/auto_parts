@@ -27,6 +27,7 @@ body {
   background-image: url(img/background_header.svg);
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 .heading_text {
   margin-top: 100px;
@@ -256,56 +257,85 @@ body {
 }
 
 /*catalog*/
+
 .content_catalog {
   margin-top: 100px;
-  margin-bottom: 200px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1500px;
 }
+
 .cart_catalog {
-  width: 394px;
+  width: calc(100% - 20px);
+  max-width: 394px;
   height: 496px;
-  margin-right: 165px;
-  margin-top: 100px;
+  margin: 0;
+  margin-bottom: 50px;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
 }
+
 .cart_catalog:hover {
   transform: scale(1.1);
 }
+
 .cart_catalog a {
-  text-decoration: none;
   color: #ffffff;
+  text-decoration: none;
 }
+
 .tires {
-  background: url(img/tires_cart_back.svg);
+  background-image: url(img/tires_cart_back.svg);
 }
+
 .disk {
-  background: url(img/disk_cart_back.svg);
+  background-image: url(img/disk_cart_back.svg);
 }
+
 .oil {
-  background: url(img/oil_cart_back.svg);
+  background-image: url(img/oil_cart_back.svg);
 }
+
 .brake {
-  background: url(img/brake_back.svg);
+  background-image: url(img/brake_back.svg);
 }
+
 .battery {
-  background: url(img/battery_back.svg);
+  background-image: url(img/battery_back.svg);
 }
+
 .filter {
-  background: url(img/filter_back.svg);
+  background-image: url(img/filter_back.svg);
 }
+
 .cart_catalog img {
-  margin-top: 37px;
-  margin-left: 66px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
+
 .cart_catalog p {
-  text-align: center;
-  margin-top: 63px;
+  margin-top: 20px;
   font-size: 36px;
   font-weight: bold;
 }
+
 .first {
-  margin-left: 120px;
+  margin-left: 0;
 }
+
+
+
+
 
 /*auth*/
 .auth_block {
@@ -476,6 +506,7 @@ label {
 }
 .img_profile_card {
   margin-top: 22.1%;
+  width: 90%;
 }
 .status_discount_card {
   font-size: 40px;
@@ -790,7 +821,7 @@ hr {
   border-radius: 10px;
   width: 300px;
   height: 300px;
-  margin-left: 20px; /* Отступ слева */
+  margin-left: 20px;
 }
 
 .info_basket_cart {

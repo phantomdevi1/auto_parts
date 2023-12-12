@@ -88,7 +88,7 @@ mysqli_close($conn);
 
 <div class="content_profile" id="profile_block">
     <div class="profile_block_left">
-        <img src="img/default_ava.svg" alt="Аватарка" class="ava_img">
+        <img src="img/default_ava.svg" alt="Аватарка" class="ava_img" width="90%">
         <p class="name_profile"><?php echo $user_name; ?></p>
         <form method="post">
             <button class="exit_profile" name="logout">Выйти</button>
@@ -116,7 +116,7 @@ mysqli_close($conn);
             <p class="title_info_profile">Заказы</p>
             <hr>
             <div class="order_profile">
-                <a href="orders.php"><img src="img/actual_order.svg" alt=""></a>                
+                <a href="orders.php"><img src="img/actual_order.svg" alt="" width="90%"></a>                
             </div>
         </div>
     </div>

@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
     <p class="title_write_rewiew">Написать отзыв</p>
     <div class="write_rewiew_estimation">
-      <p>Выбирете оценку:</p>
+      <p>Выберите оценку:</p>
       <select name="rating" id="ratingList">
         <option value="5">5</option>
         <option value="4">4</option>
