@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Добавление товара\категории</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header_index">
+      <img src="img/logo.svg" alt="" />
+      <h1 class="heading_text">ДОБАВЛЕНИЕ</h1>
+      <div class="toolbar">
+        <a href="index.html">ГЛАВНАЯ</a>
+        <a href="catalog.php">КАТАЛОГ</a>
+        <a href="basket.php">КОРЗИНА</a>
+        <a href="reviews.php">ОТЗЫВЫ</a>
+        <a href="profile.php" class="last">ПРОФИЛЬ</a>
+      </div>
+    </header>
+    <div class="content_create_product">
+      <div class="add_product">
+        <h2>Добавление товара</h2>
+        <p>Добавьте фото:</p>
+        <button onclick="test()"></button>
+        <input
+          type="text"
+          placeholder="Имя товара"
+          name="name_product"
+          class="add_product_name"
+        />
+        <select name="category" id="" class="choose_category">
+          <option value="">Масла и фильтры</option>
+        </select>
+        <input
+          type="number"
+          placeholder="Стоимость товара за шт."
+          name="add_price"
+          class="add_product_price"
+        />
+        <textarea
+          id=""
+          cols="30"
+          rows="10"
+          name="description_product"
+          class="add_description_product"
+          placeholder="Описание товара"
+        ></textarea>
+        <input
+          type="submit"
+          name=""
+          id=""
+          value="Добавить товар"
+          class="add_product_btn"
+        />
+      </div>
+      <div class="add_category">
+        <h2>Добавление категории</h2>
+        <input
+          type="text"
+          placeholder="Название категории"
+          name="name_category"
+          class="add_product_name"
+        />
+        <input
+          type="submit"
+          name=""
+          id=""
+          value="Добавить категорию"
+          class="add_product_btn"
+        />
+      </div>
+    </div>
+    <script>
+      function test() {
+        console.log("кликается");
+      }
+    </script>
+  </body>
+</html>
