@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Ошибка подключения к базе данных: " . mysqli_connect_error());
     }
 
-    $query = "SELECT * FROM users WHERE user_name = '$username'"; // Заменил 'username' на 'user_name'
+    $query = "SELECT * FROM users WHERE user_name = '$username'";
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
