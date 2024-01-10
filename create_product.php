@@ -6,6 +6,25 @@
     <title>Добавление товара\категории</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+  <?
+  session_start();
+  if ($_SESSION['admin_status'] == 0) {
+    header("Location: profile.php");
+    exit;
+}
+include 'config.php';
+
+if (!$conn)
+{
+  die("Ошибка подключения к базе данных: " . mysqli_connect_error());
+}
+$category_name_query = "SELECT ID, category_name FROM category"
+// $result = mysqli_query($conn, $category_name_query);
+// if ($result && mysqli_num_rows($result) > 0) {
+//   $row = mysqli_fetch_assoc($result);
+//   $category_name = $row['category_name'];
+// }
+  ?>
   <body>
     <header class="header_index">
       <img src="img/logo.svg" alt="" />
@@ -22,7 +41,8 @@
       <div class="add_product">
         <h2>Добавление товара</h2>
         <p>Добавьте фото:</p>
-        <button onclick="test()"></button>
+        <form action="" method = "post" class="add_product_form">
+        <input type = "file" class="add_img" accept="image/*"></input>
         <input
           type="text"
           placeholder="Имя товара"
@@ -30,7 +50,7 @@
           class="add_product_name"
         />
         <select name="category" id="" class="choose_category">
-          <option value="">Масла и фильтры</option>
+          <option value="1">Масла и фильтры</option>
         </select>
         <input
           type="number"
@@ -53,7 +73,19 @@
           value="Добавить товар"
           class="add_product_btn"
         />
+        </form>
       </div>
+      <?
+      $targetDir = "img/product/";
+      $targetFile = $targetDir . auto_parts($_FILES["product_image"]["name"]);
+      $imagePath = $targetFile;
+      $productName = $_POST[name_product];
+      $productCategory = $_POST[category];
+      $productPrice = $_POST[add_price];
+      $productDescription = $_POST[description_product];
+      $sql = "INSER INTO product(name, description, price, image, category) VALUES ('$productName', '$productDescription', '$productPrice', '$imagePath', '$productCategory');"
+
+      ?>
       <div class="add_category">
         <h2>Добавление категории</h2>
         <input
@@ -72,9 +104,7 @@
       </div>
     </div>
     <script>
-      function test() {
-        console.log("кликается");
-      }
+     
     </script>
   </body>
 </html>

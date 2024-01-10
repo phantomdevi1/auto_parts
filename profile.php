@@ -23,7 +23,7 @@ if (!$conn) {
     die("Ошибка подключения к базе данных: " . mysqli_connect_error());
 }
 
-$query = "SELECT user_name, user_email, user_phone, discount_card FROM users WHERE ID = $user_id";
+$query = "SELECT user_name, user_email, user_phone, access_status, discount_card FROM users WHERE ID = $user_id";
 $result = mysqli_query($conn, $query);
 
 if ($result && mysqli_num_rows($result) > 0) {
@@ -31,7 +31,9 @@ if ($result && mysqli_num_rows($result) > 0) {
     $user_name = $row['user_name'];
     $user_email = $row['user_email'];
     $user_phone = $row['user_phone'];
+    $admin_status = $row['access_status'];
     $discount_card_status = $row['discount_card'] == 1 ? 'активна' : 'не активна';
+    $_SESSION['admin_status'] = $row['access_status'];
 } else {
     // Handle the case where user data is not found
 }
@@ -51,7 +53,7 @@ if (isset($_POST['add_discount_card'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $currentDiscountCardValue = $row['discount_card'];
+        $currentDiscountCardValue = $row['discount_card'];       
 
         if ($currentDiscountCardValue == 0) {
             // Update the discount card value to 1 if it's not already issued
@@ -113,11 +115,24 @@ mysqli_close($conn);
             </div>
         </div>
         <div class="user_order">
-            <p class="title_info_profile">Заказы</p>
+            <?
+            if($admin_status == 1){
+                echo "<p class='title_info_profile'>Заказы и товары</p>";
+            }
+            else{
+                echo "<p class='title_info_profile'>Заказы</p>";
+            }
+            ?>
             <hr>
             <div class="order_profile">
-                <a href="orders.php"><img src="img/actual_order.svg" alt="" width="90%"></a>                
+                <a href="orders.php"><img src="img/actual_order.svg" alt="" width="90%"></a>           
+                <?
+            if($admin_status == 1){
+                echo "<a href='create_product.php'><img src='img/add_tovar_icon.svg' width='90%'></a>";
+            }            
+            ?>                 
             </div>
+            
         </div>
     </div>
 </div>

@@ -993,9 +993,15 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 100%;
+}
+.add_product_form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   width: 70%;
 }
-.add_product button {
+.add_img {
   border-radius: 10px;
   background-image: url(img/default_img.svg);
   background-size: cover;
@@ -1004,7 +1010,7 @@ hr {
   border: none;
   cursor: pointer;
 }
-.add_product button:hover {
+.add_img:hover {
   transform: scale(1.1);
 }
 .add_product button:active {
