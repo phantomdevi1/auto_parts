@@ -23,28 +23,39 @@ body {
 
 /*header*/
 .header_index {
-  min-height: 940px;
+  min-height: 100vh; /* Adjusted min-height for smaller screens */
   background-image: url(img/background_header.svg);
   display: flex;
   flex-direction: column;
   text-align: center;
 }
+
 .heading_text {
-  margin-top: 100px;
+  margin-top: 5%; /* Adjusted margin-top for responsiveness */
   color: #ffffff;
   font-weight: bold;
-  font-size: 130px;
+  font-size: 3em;
 }
+
 .toolbar {
-  margin-top: 56px;
+  margin-top: 3%;
+  justify-content: center; /* Centering the links */
+  width: 40%;
 }
+
 .toolbar a {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.5rem; /* Adjusted font size for responsiveness */
   color: #ffffff;
   font-weight: bold;
-  margin-right: 61px;
+  margin-right: 2%; /* Adjusted margin-right for responsiveness */
+  margin-bottom: 1%; /* Adjusted margin-bottom for responsiveness */
 }
+
+.toolbar a:last-child {
+  margin-right: 0; /* Removed margin-right for the last link */
+}
+
 .toolbar a:hover {
   text-transform: uppercase;
   background-image: linear-gradient(
@@ -63,17 +74,13 @@ body {
   -webkit-text-fill-color: transparent;
   animation: textclip 5s linear infinite;
   display: inline-block;
-  font-size: 25px;
+  font-size: 1.8rem; /* Adjusted font size for responsiveness */
 }
 
 @keyframes textclip {
   to {
     background-position: 200% center;
   }
-}
-
-.last {
-  margin-right: 0px;
 }
 
 /*content*/
@@ -590,7 +597,7 @@ hr {
   margin-top: 100px;
   color: #ffffff;
   font-weight: bold;
-  font-size: 120px;
+  font-size: 4em;
   text-transform: uppercase;
 }
 .content_category {
@@ -983,86 +990,76 @@ hr {
   display: flex;
   flex-direction: column;
 }
+
 .content_create_product h2 {
   font-size: 60px;
 }
+
 .content_create_product p {
   font-size: 30px;
 }
+
 .add_product {
   display: flex;
   flex-direction: column;
   gap: 30px;
   width: 100%;
 }
+
 .add_product_form {
   display: flex;
   flex-direction: column;
   gap: 30px;
   width: 70%;
 }
+
 .add_img {
   border-radius: 10px;
   background-image: url(img/default_img.svg);
   background-size: cover;
-  width: 40vh;
+  width: 350px;
   min-height: 40vh;
   border: none;
   cursor: pointer;
 }
+
 .add_img:hover {
   transform: scale(1.1);
 }
+
 .add_product button:active {
   background-image: url(img/default_img_active.svg);
 }
-.add_product_name {
-  width: 40%;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  background-color: #545454;
-  font-size: 20px;
-  color: white;
-}
-.choose_category {
-  width: 40%;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  background-color: #545454;
-  font-size: 20px;
-  color: white;
-}
-.add_product_price {
-  width: 40%;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  background-color: #545454;
-  font-size: 20px;
-  color: white;
-}
+
+.add_product_name,
+.choose_category,
+.add_product_price,
 .add_description_product {
-  width: 40%;
-  height: 200px;
+  width: 100%; /* Adjusted width for responsiveness */
+  height: 50px;
   border-radius: 10px;
   border: none;
   background-color: #545454;
   font-size: 20px;
   color: white;
 }
+
+.add_description_product {
+  height: 150px; /* Adjusted height for responsiveness */
+}
+
 .add_product_btn {
-  width: 35%;
-  height: 35px;
+  width: 60%; /* Adjusted width for responsiveness */
+  min-height: 40px;
   background-color: #86bbd8;
   border: none;
   border-radius: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 20px; /* Adjusted margin for responsiveness */
   cursor: pointer;
   font-size: 25px;
   font-weight: 500;
 }
+
 .add_product_btn:hover {
   background-color: #f26419;
   color: #fff;
@@ -1075,4 +1072,30 @@ hr {
   flex-direction: column;
   gap: 30px;
   width: 70%;
+}
+
+/* Media Queries for responsiveness */
+
+@media only screen and (max-width: 768px) {
+  .toolbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 30px;
+  }
+  .toolbar a {
+    margin: 0;
+  }
+  .add_product_form,
+  .add_category {
+    width: 90%; /* Adjusted width for smaller screens */
+  }
+  .add_img {
+    width: 100%;
+  }
+  .content_create_product h2 {
+    font-size: 40px;
+    text-align: center;
+  }
 }
