@@ -24,7 +24,7 @@ body {
 /*header*/
 .header_index {
   min-height: 100vh; /* Adjusted min-height for smaller screens */
-  background-image: url(img/background_header.svg);
+  background: url(img/background_header.svg) no-repeat;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -299,30 +299,6 @@ body {
 .cart_catalog a {
   color: #ffffff;
   text-decoration: none;
-}
-
-.tires {
-  background-image: url(img/tires_cart_back.svg);
-}
-
-.disk {
-  background-image: url(img/disk_cart_back.svg);
-}
-
-.oil {
-  background-image: url(img/oil_cart_back.svg);
-}
-
-.brake {
-  background-image: url(img/brake_back.svg);
-}
-
-.battery {
-  background-image: url(img/battery_back.svg);
-}
-
-.filter {
-  background-image: url(img/filter_back.svg);
 }
 
 .cart_catalog img {
@@ -1017,7 +993,7 @@ hr {
   border-radius: 10px;
   background-image: url(img/default_img.svg);
   background-size: cover;
-  width: 350px;
+  width: 400px;
   min-height: 40vh;
   border: none;
   cursor: pointer;
