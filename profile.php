@@ -73,6 +73,12 @@ if (isset($_POST['add_discount_card'])) {
     }
 }
 
+    $query_orders = "SELECT COUNT(*) FROM `orders` WHERE status = 'В обработке';";
+    $orders = mysqli_query($conn, $query_orders);
+    echo $orders;
+    if($orders == 0){
+        $orders = "Новых заказов нет";
+    }
 mysqli_close($conn);
 ?>
 
@@ -90,16 +96,38 @@ mysqli_close($conn);
 
 <div class="content_profile" id="profile_block">
     <div class="profile_block_left">
-        <img src="img/default_ava.svg" alt="Аватарка" class="ava_img" width="90%" max-width="250px">
+        <?
+        if($admin_status == 1){
+            $avatar = "img/admin_avatar.png";
+        }
+        else{
+            $avatar = "img/default_ava.svg";
+        }
+        ?>
+        <img src="<?= $avatar ?>" alt="Аватарка" class="ava_img" width="90%" max-width="250px">
         <p class="name_profile"><?php echo $user_name; ?></p>
         <form method="post">
             <button class="exit_profile" name="logout">Выйти</button>
         </form>
-        <img class="img_profile_card" src="img/discount_cart.svg" alt="">
-        <p class="status_discount_card"><?php echo $discount_card_status; ?></p>
-        <form action="" method="post">
-        <button class="add_discount_card" name="add_discount_card" <?php echo $discount_card_status == 'активна' ? 'style="display:none;"' : ''; ?>>Оформить</button>
-        </form>    
+         
+        
+        <?
+        if($admin_status == 1){
+            echo "<div class='admin_block'>";
+            echo "<p>Новые заказы: <span><?= $orders?></span></p>";
+            echo "<p>Клиенты: <span>1</span></p>";
+            echo "<p>Всего заказов: <span>1</span></p>";
+            echo "</div>";
+
+        }
+        else {
+            echo "<img class='img_profile_card' src='img/discount_cart.svg'>";
+            echo "<p class='status_discount_card'>" . $discount_card_status . "</p>";
+            echo "<form action='' method='post'>";
+            echo "<button class='add_discount_card' name='add_discount_card' " . ($discount_card_status == 'активна' ? "style='display:none;'" : "") . ">Оформить</button>";
+            echo "</form>";
+        }
+        ?>
     </div>
     <div class="profile_block_right">
         <p class="title_info_profile">Информация</p>
@@ -124,11 +152,16 @@ mysqli_close($conn);
             }
             ?>
             <hr>
-            <div class="order_profile">
-                <a href="orders.php"><img src="img/actual_order.svg" alt="" width="90%"></a>           
+            <div class="order_profile">  
+                                         
                 <?
             if($admin_status == 1){
+                echo "<a href='orders.php'><img src='img/order_admin_icon.svg' width='90%'></a>";
                 echo "<a href='create_product.php'><img src='img/add_tovar_icon.svg' width='90%'></a>";
+                echo "<a href=''><img src='img/edit_tovar_icon.svg' width='90%'></a>";
+            }
+            else{
+                echo "<a href='orders.php'><img src='img/actual_order.svg' alt='заказы' width='90%'></a>";
             }            
             ?>                 
             </div>

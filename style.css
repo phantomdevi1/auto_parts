@@ -458,7 +458,7 @@ label {
   width: 30%;
   background-color: #f26419;
   border-radius: 10px 0 0 10px;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -493,8 +493,15 @@ label {
 .exit_profile:active {
   background-color: #535050;
 }
+.admin_block {
+  margin-top: 10%;
+}
+.admin_block p {
+  font-size: 30px;
+  text-align: left;
+}
 .img_profile_card {
-  margin-top: 22.1%;
+  margin-top: 10%;
   width: 90%;
 }
 .status_discount_card {
@@ -523,7 +530,7 @@ label {
   width: 70%;
   background-color: #f6ae2d;
   border-radius: 0 10px 10px 0;
-  height: 100vh;
+  height: 90vh;
 }
 .profile_block_right p {
   font-size: 50px;
