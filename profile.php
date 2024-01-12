@@ -73,12 +73,28 @@ if (isset($_POST['add_discount_card'])) {
     }
 }
 
-    $query_orders = "SELECT COUNT(*) FROM `orders` WHERE status = 'В обработке';";
-    $orders = mysqli_query($conn, $query_orders);
-    echo $orders;
-    if($orders == 0){
-        $orders = "Новых заказов нет";
-    }
+$query_orders = "SELECT COUNT(*) FROM `orders` WHERE status = 'В обработке';";
+$result = mysqli_query($conn, $query_orders);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $orders_count = $row['COUNT(*)'];
+}
+
+$query_users = "SELECT COUNT(*) FROM `users` WHERE access_status != 1;";
+$result = mysqli_query($conn, $query_users);
+if($result){
+    $row = mysqli_fetch_assoc($result);
+    $users_count = $row['COUNT(*)'];    
+}
+
+$query_all_orders = "SELECT COUNT(*) FROM `orders`;";
+$result = mysqli_query($conn, $query_all_orders);
+if($result){
+    $row = mysqli_fetch_assoc($result);
+    $all_orders_count = $row['COUNT(*)'];
+}
+
 mysqli_close($conn);
 ?>
 
@@ -114,9 +130,9 @@ mysqli_close($conn);
         <?
         if($admin_status == 1){
             echo "<div class='admin_block'>";
-            echo "<p>Новые заказы: <span><?= $orders?></span></p>";
-            echo "<p>Клиенты: <span>1</span></p>";
-            echo "<p>Всего заказов: <span>1</span></p>";
+            echo "<p>Новые заказы:  $orders_count </p>";
+            echo "<p>Клиенты: $users_count </p>";
+            echo "<p>Всего заказов: $all_orders_count </p>";
             echo "</div>";
 
         }
@@ -156,7 +172,7 @@ mysqli_close($conn);
                                          
                 <?
             if($admin_status == 1){
-                echo "<a href='orders.php'><img src='img/order_admin_icon.svg' width='90%'></a>";
+                echo "<a href='admin_order.php'><img src='img/order_admin_icon.svg' width='90%'></a>";
                 echo "<a href='create_product.php'><img src='img/add_tovar_icon.svg' width='90%'></a>";
                 echo "<a href=''><img src='img/edit_tovar_icon.svg' width='90%'></a>";
             }

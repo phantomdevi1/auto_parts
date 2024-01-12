@@ -52,7 +52,7 @@
               $item_quantity = $item_row['quantity'];
               
               // Выводим название товара с количеством
-              echo '<div><p>Название:</p><span>' . $product_name . ' (x' . $item_quantity . ')</span></div>';
+              echo '<div><p>Товар:</p><span>' . $product_name . ' (x' . $item_quantity . ')</span></div>';
           }
 
           echo '</div>';
