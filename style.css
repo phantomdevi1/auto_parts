@@ -888,7 +888,7 @@ hr {
   width: 72%;
   background-color: #0d0d0d;
   min-height: 363px;
-  margin-top: 100px;
+  margin-bottom: 100px;
   border-radius: 10px;
   display: flex;
 }
@@ -1059,17 +1059,93 @@ hr {
 }
 
 /* admin_order */
-.admin_order_btn {
-  padding: 10px;
-  background-color: #86bbd8;
-  color: black;
-  border-radius: 10px;
-  text-decoration: none;
-  font-size: 1.4em;
+.status_admin_order {
+  margin-bottom: 100px;
 }
-.admin_order_btn:hover {
+.select_status {
+  width: 15%;
+  max-height: 50px;
+  background-color: #545454;
+  border-radius: 10px;
+  font-size: 25px;
+  color: #888888;
+  margin-right: 1%;
+  cursor: pointer;
+}
+.status_order_input {
+  margin-bottom: 50px;
+  font-size: 2em;
+  text-align: center;
+}
+.show_order_btn {
+  width: 10%;
+  max-height: 50px;
+  border-radius: 10px;
+  background-color: #86bbd8;
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 25px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+.show_order_btn:hover {
   background-color: #f26419;
   color: #fff;
+}
+.status_change {
+  display: inline-flex;
+  gap: 5%;
+  width: 170%;
+}
+.in_delivery_btn {
+  width: 30%;
+  font-size: 1.4em;
+  background-color: #777777;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.in_delivery_btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+.in_assembly_btn {
+  width: 30%;
+  font-size: 1.4em;
+  background-color: #f26419;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.in_assembly_btn:hover {
+  background-color: #000;
+  color: #f26419;
+}
+.deliverd_btn {
+  width: 30%;
+  font-size: 1.4em;
+  background-color: #86bbd8;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.deliverd_btn:hover {
+  color: #86bbd8;
+  background-color: #000;
+}
+.given_btn {
+  width: 30%;
+  font-size: 1.4em;
+  background-color: #2df635;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.given_btn:hover {
+  color: #2df635;
+  background-color: #000;
 }
 
 /* Media Queries for responsiveness */

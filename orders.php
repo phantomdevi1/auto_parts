@@ -22,18 +22,16 @@
         <?php
         include 'config.php';
         session_start();
-        // Получение данных из базы данных (замените на ваш реальный код запроса)
         $user_id = $_SESSION['user_id']; // Получаем ID пользователя из сессии
-        $query = "SELECT * FROM orders WHERE user_id = $user_id ORDER BY order_date DESC"; // Замените на ваш запрос
+        $query = "SELECT * FROM orders WHERE user_id = $user_id ORDER BY order_date DESC";
         $result = mysqli_query($conn, $query);
 
        // Перебор результатов запроса
         while ($row = mysqli_fetch_assoc($result)) {
-          $order_date = date('d.m.Y H:i', strtotime($row['order_date'])); // Format: DD.MM.YYYY HH:MM
+          $order_date = date('d.m.Y H:i', strtotime($row['order_date']));
           $status = $row['status'];
           $total_price = $row['full_price'];
 
-          // Получение данных из таблицы order_items (замените на ваш запрос)
           $order_id = $row['order_id'];
           $query_items = "SELECT * FROM order_items INNER JOIN product ON order_items.product_id = product.ID WHERE order_items.order_id = $order_id";
           $result_items = mysqli_query($conn, $query_items);
@@ -42,6 +40,7 @@
           echo '<div class="card_order">';
           echo '<div class="info_card_order">';
           echo '<div><p>' . $order_date . '</p></div>';
+          echo '<div><p>Номер заказа:</p><span>' . $order_id . '</span></div>';
           echo '<div><p>Статус:</p><span>' . $status . '</span></div>';
           echo '<div><p>Общая стоимость:</p><span>' . $total_price . ' ₽</span></div>';
           

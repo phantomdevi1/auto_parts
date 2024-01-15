@@ -20,58 +20,117 @@
     </header>
     <div class="content_order">
         <center>
-            <form method="post">
-                <select class="select" name="order_status">
+            <form method="post" class="status_admin_order">
+                <select class="select_status" name="order_status">
                     <option value="В обработке">В обработке</option>
+                    <option value="В сборке">В сборке</option>
                     <option value="В доставке">В доставке</option>
-                    <option value="Доставлен">Доставлен</option>
                     <option value="Готов к выдаче">Готов к выдаче</option>
+                    <option value="Выдан">Выдан</option>
                 </select>
-                <button type="submit" name="show_orders">Показать</button>
+                <button type="submit" name="show_orders" class="show_order_btn">Показать</button>
             </form>
+
         </center>
 
         <?php
-        include 'config.php';
-        session_start();
+include 'config.php';
+session_start();
 
-        if (isset($_POST['show_orders'])) {
-            $selected_status = $_POST['order_status'];
-            $query = "SELECT * FROM orders WHERE status = '$selected_status' ORDER BY order_date DESC";
-            $result = mysqli_query($conn, $query);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $order_date = date('d.m.Y H:i', strtotime($row['order_date']));
-                $status = $row['status'];
-                $total_price = $row['full_price'];
+if (isset($_POST['show_orders'])) {
+    $selected_status = $_POST['order_status'];
+    $query = "SELECT * FROM orders WHERE status = '$selected_status' ORDER BY order_date DESC";
+    $result = mysqli_query($conn, $query);
+    $query_t = "SELECT COUNT(*) FROM `orders` WHERE status = '$selected_status';";
+    $result_t = mysqli_query($conn, $query_t);
 
-                $order_id = $row['order_id'];
-                $query_items = "SELECT * FROM order_items INNER JOIN product ON order_items.product_id = product.ID WHERE order_items.order_id = $order_id";
-                $result_items = mysqli_query($conn, $query_items);
+    if ($result_t) {
+        $row = mysqli_fetch_assoc($result_t);
+        $count_order_status = $row['COUNT(*)'];
+    }
 
-                echo '<div class="card_order">';
-                echo '<div class="info_card_order">';
-                echo '<div><p>' . $order_date . '</p></div>';
-                echo '<div><p>Статус:</p><span>' . $status . '</span></div>';
-                echo '<div><p>Общая стоимость:</p><span>' . $total_price . ' ₽</span></div>';
+    echo "<p class='status_order_input'>$selected_status: $count_order_status</p>";
+    while ($row = mysqli_fetch_assoc($result)) {
+        $order_date = date('d.m.Y H:i', strtotime($row['order_date']));
+        $status = $row['status'];
+        $total_price = $row['full_price'];
 
-                while ($item_row = mysqli_fetch_assoc($result_items)) {
-                    $product_name = $item_row['name'];
-                    $product_image = $item_row['image'];
-                    $item_quantity = $item_row['quantity'];
-                    echo '<div><p>Товар:</p><span>' . $product_name . ' (x' . $item_quantity . ')</span></div>';
-                }
+        $order_id = $row['order_id'];
+        $query_user = "SELECT user_name FROM users
+        WHERE ID = (SELECT user_id FROM orders WHERE order_id = $order_id)";
+        $result_user = mysqli_query($conn, $query_user);
+        $user_row = mysqli_fetch_assoc($result_user);
+        $username = $user_row['user_name'];
 
-                // Добавляем ссылку с ID заказа
-                echo "<a class='admin_order_btn' href='admin_order_details.php?id=$order_id'>Перейти</a>";
-                echo '</div>';
-                echo '<div class="img_card_order">';
-                echo '<img src="' . $product_image . '" alt="" width="293px">';
-                echo '</div>';
-                echo '</div>';
-            }
+        $query_items = "SELECT order_items.*, product.*
+        FROM order_items
+        INNER JOIN product ON order_items.product_id = product.ID
+        WHERE order_items.order_id = $order_id";
+        $result_items = mysqli_query($conn, $query_items);
+        $result_items = mysqli_query($conn, $query_items);                
+        
+        
+        echo '<div class="card_order">';
+        echo '<div class="info_card_order">';
+        echo '<div><p>' . $order_date . '</p></div>';
+        echo '<div><p>Номер заказа:</p><span>' . $order_id . '</span></div>';
+        echo '<div><p>Заказчик:</p><span>' . $username . '</span></div>';
+        echo '<div><p>Статус:</p><span>' . $status . '</span></div>';
+        echo '<div><p>Общая стоимость:</p><span>' . $total_price . ' ₽</span></div>';
+        while ($item_row = mysqli_fetch_assoc($result_items)) {
+            $product_name = $item_row['name'];
+            $product_image = $item_row['image'];
+            $item_quantity = $item_row['quantity'];
+            echo '<div><p>Товар:</p><span>' . $product_name . ' (x' . $item_quantity . ')</span></div>';
         }
+        
+        
+        
+        echo "<form method='post' class='status_change'>";
+        echo "<input type='hidden' name='order_id' value='$order_id'>";
+        echo "<button type='submit' name='in_delivery' class='in_delivery_btn'>В доставке</button>";
+        echo "<button type='submit' name='in_assembly' class='in_assembly_btn'>В сборке</button>";
+        echo "<button type='submit' name='delivered' class='deliverd_btn'>Готов к выдаче</button>";
+        echo "<button type='submit' name='given' class='given_btn'>Выдан</button>";
+        echo "</form>";
+        echo '</div>';
+        echo '<div class="img_card_order">';
+        echo '<img src="' . $product_image . '" alt="" width="293px">';
+        echo '</div>';
+        echo '</div>';
+    }
+}
+
+// Обработка действий
+if (isset($_POST['in_delivery'])) {
+    $order_id = $_POST['order_id'];
+    $update_query = "UPDATE orders SET status = 'В доставке' WHERE order_id = $order_id";
+    mysqli_query($conn, $update_query);
+}
+
+if (isset($_POST['in_assembly'])) {
+    $order_id = $_POST['order_id'];
+    $update_query = "UPDATE orders SET status = 'В сборке' WHERE order_id = $order_id";
+    mysqli_query($conn, $update_query);
+}
+
+if (isset($_POST['delivered'])) {
+    $order_id = $_POST['order_id'];
+    $update_query = "UPDATE orders SET status = 'Готов к выдаче' WHERE order_id = $order_id";
+    mysqli_query($conn, $update_query);
+}
+if (isset($_POST['given'])) {
+    $order_id = $_POST['order_id'];
+    $update_query = "UPDATE orders SET status = 'Выдан' WHERE order_id = $order_id";
+    mysqli_query($conn, $update_query);
+}
+
 mysqli_close($conn);
 ?>
+
+
+
+
 
     </div>
 </body>
