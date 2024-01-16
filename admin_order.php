@@ -22,6 +22,7 @@
         <center>
             <form method="post" class="status_admin_order">
                 <select class="select_status" name="order_status">
+                    <option value="Все заказы">Все заказы</option>
                     <option value="В обработке">В обработке</option>
                     <option value="В сборке">В сборке</option>
                     <option value="В доставке">В доставке</option>
@@ -36,18 +37,36 @@
         <?php
 include 'config.php';
 session_start();
-
+$selected_status = 'Все заказы';
 if (isset($_POST['show_orders'])) {
     $selected_status = $_POST['order_status'];
-    $query = "SELECT * FROM orders WHERE status = '$selected_status' ORDER BY order_date DESC";
+    if($selected_status == 'Все заказы'){
+        $query = "SELECT * FROM orders ORDER BY order_date DESC";
+    }
+    else{
+     $query = "SELECT * FROM orders WHERE status = '$selected_status' ORDER BY order_date DESC";   
+    }    
     $result = mysqli_query($conn, $query);
+    
     $query_t = "SELECT COUNT(*) FROM `orders` WHERE status = '$selected_status';";
     $result_t = mysqli_query($conn, $query_t);
 
-    if ($result_t) {
+    $query_three = "SELECT COUNT(*) FROM `orders`";
+    $result_three = mysqli_query($conn, $query_three);
+
+    if($selected_status == 'Все заказы'){
+        if ($result_three) {        
+            $row = mysqli_fetch_assoc($result_three);
+            $count_order_status = $row['COUNT(*)'];
+        }
+    }
+    else{
+      if ($result_t) {        
         $row = mysqli_fetch_assoc($result_t);
         $count_order_status = $row['COUNT(*)'];
+    }  
     }
+    
 
     echo "<p class='status_order_input'>$selected_status: $count_order_status</p>";
     while ($row = mysqli_fetch_assoc($result)) {
