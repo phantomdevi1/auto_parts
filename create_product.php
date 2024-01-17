@@ -24,10 +24,6 @@
     $category_name_query = "SELECT ID, category_name FROM category";
     $result = mysqli_query($conn, $category_name_query);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $category_name = $row['category_name'];
-    }
     ?>
 
     <header class="header_index">
