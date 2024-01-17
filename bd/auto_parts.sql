@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Дек 12 2023 г., 23:33
+-- Хост: 127.0.0.1:3307
+-- Время создания: Янв 17 2024 г., 17:24
 -- Версия сервера: 8.0.30
--- Версия PHP: 7.2.34
+-- Версия PHP: 8.0.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,13 +35,6 @@ CREATE TABLE `cart` (
   `date_added` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Дамп данных таблицы `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `date_added`) VALUES
-(73, 1, 44, 4, '2023-12-12 20:32:27');
-
 -- --------------------------------------------------------
 
 --
@@ -50,20 +43,22 @@ INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `date_added`
 
 CREATE TABLE `category` (
   `ID` int NOT NULL,
-  `category_name` varchar(255) NOT NULL
+  `category_name` varchar(255) NOT NULL,
+  `image_back` varchar(255) DEFAULT NULL,
+  `image_icon` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `category`
 --
 
-INSERT INTO `category` (`ID`, `category_name`) VALUES
-(1, 'Шины'),
-(2, 'Диски'),
-(3, 'Масла и фильтры'),
-(4, 'Тормозная система'),
-(5, 'Аккумуляторы'),
-(6, 'Воздушные фильтры');
+INSERT INTO `category` (`ID`, `category_name`, `image_back`, `image_icon`) VALUES
+(1, 'Шины', 'img/back_category/tires_cart_back.svg', 'img/icon_category/tires_icon.svg'),
+(2, 'Диски', 'img/back_category/disk_cart_back.svg', 'img/icon_category/disk_icon.svg'),
+(3, 'Масла и фильтры', 'img/back_category/oil_cart_back.svg', 'img/icon_category/oil_icon.svg'),
+(4, 'Тормозная система', 'img/back_category/brake_back.svg', 'img/icon_category/brake_icon.svg'),
+(5, 'Аккумуляторы', 'img/back_category/battery_back.svg', 'img/icon_category/battery_icon.svg'),
+(6, 'Воздушные фильтры', 'img/back_category/filter_back.svg', 'img/icon_category/filter_icon.svg');
 
 -- --------------------------------------------------------
 
@@ -84,7 +79,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status`, `full_price`) VALUES
-(33, 1, '2023-12-12 20:31:52', 'В сборке', 1242);
+(33, 1, '2023-12-12 20:31:52', 'В сборке', 1242),
+(34, 1, '2024-01-12 10:41:44', 'В обработке', 51167),
+(36, 1, '2024-01-12 13:54:06', 'Готов к выдаче', 79045),
+(38, 7, '2024-01-15 13:27:22', 'Выдан', 8500);
 
 -- --------------------------------------------------------
 
@@ -105,7 +103,18 @@ CREATE TABLE `order_items` (
 
 INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `quantity`) VALUES
 (38, 33, 41, 1),
-(39, 33, 9, 1);
+(39, 33, 9, 1),
+(40, 34, 44, 4),
+(43, 36, 2, 1),
+(44, 36, 1, 1),
+(45, 36, 3, 1),
+(46, 36, 4, 1),
+(47, 36, 5, 1),
+(48, 36, 44, 1),
+(49, 36, 5, 1),
+(50, 36, 29, 1),
+(51, 36, 28, 1),
+(53, 38, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -161,7 +170,7 @@ INSERT INTO `product` (`ID`, `name`, `description`, `price`, `image`, `category`
 (39, 'Hengst Воздушный фильтр', 'Hengst представляет надежный воздушный фильтр для обеспечения чистого воздуха в двигателе.', '679.99', 'img/product/hengst_air_filter.jpg', 6),
 (41, 'Valvoline Моторное масло', 'Valvoline - высококачественное моторное масло для долговечной работы двигателя.', '999.99', 'img/product/valvoline_motor_oil.jpg', 3),
 (42, 'WIX Масляный фильтр', 'WIX предлагает прочный масляный фильтр для оптимальной защиты двигателя.', '299.99', 'img/product/wix_oil_filter.jpg', 3),
-(43, 'Continental ContiPremiumContact 6', 'Continental ContiPremiumContact 6 - летние шины с отличным сцеплением и комфортной ездой.', '8499.99', 'img/product/continental_contipremiumcontact_6.jpg', 1),
+(43, 'Continental ContiPremiumContact 6', 'Continental ContiPremiumContact 6 - летние шины с отличным сцеплением и комфортной ездой.', '10000.99', 'img/product/continental_contipremiumcontact_6.jpg', 1),
 (44, 'Enkei Raijin', 'Enkei Raijin - стильные и легкие автомобильные диски с уникальным дизайном.', '12999.99', 'img/product/enkei_raijin_wheel.jpg', 2);
 
 -- --------------------------------------------------------
@@ -208,7 +217,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `user_email`, `user_phone`, `user_name`, `user_password`, `access_status`, `discount_card`) VALUES
 (1, 'admin@mail.ru', '88888888888', 'admin', 'admin', 1, 1),
-(5, 'qwerty@mail.ru', '89053451234', 'qwerty', '1234', 0, 0);
+(7, 'qwerty@mail.ru', '89963214528', 'qwerty@mail.ru', '1234', 0, 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -270,31 +279,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT для таблицы `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
@@ -306,7 +315,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

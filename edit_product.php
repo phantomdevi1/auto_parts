@@ -15,7 +15,6 @@
     exit;
   }
 
-  // Получаем категории для фильтрации
   $category_name_query = "SELECT ID, category_name FROM category";
   $result_categories = mysqli_query($conn, $category_name_query);
   ?>
