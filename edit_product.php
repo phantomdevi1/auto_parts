@@ -139,21 +139,26 @@
 
 if (isset($_POST['delete_product'])) {
     $product_id = $_POST['product_id'];
-    // Добавьте код для удаления товара с использованием $product_id
+    $delete_product_query = "DELETE FROM product WHERE ID = $product_id";
+    if (mysqli_query($conn, $delete_product_query)) {
+        echo "<script>alert('Товар удален.')</script>";
+    } else {
+        echo "<script>alert('Ошибка: ' . mysqli_error($conn))</script>";
+    }
 }
 
 if (isset($_POST['save_changes'])) {
     $product_id = $_POST['product_id'];
-    $new_product_name = $_POST['product_name'];
+    $new_product_name = mysqli_real_escape_string($conn, $_POST['product_name']);
     $new_product_price = $_POST['cost'];
     $new_product_category = $_POST['category'];
-    $new_product_description = $_POST['description'];
+    $new_product_description = mysqli_real_escape_string($conn, $_POST['description']);
 
-    $update_product= " UPDATE `product` SET `ID`='[product_id]',`name`='[product_name]',`description`='[description]',`price`='[cost]',`category`='[category]';"; 
+    $update_product = "UPDATE `product` SET `name`='$new_product_name', `description`='$new_product_description', `price`='$new_product_price', `category`='$new_product_category' WHERE `ID` = $product_id"; 
     if (mysqli_query($conn, $update_product)) {
-      echo "<script>alert('Товар изменён.')</script>";
+      echo "<script>alert('Товар изменен.')</script>";
   } else {
-      echo "<script>alert('Ошибка: ' . $update_product   . mysqli_error($conn)')</script>";
+      echo "<script>alert('Ошибка: ' . mysqli_error($conn))</script>";
   }
-  }
+}
 ?>
