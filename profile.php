@@ -73,6 +73,14 @@ if (isset($_POST['add_discount_card'])) {
     }
 }
 
+$query_admins = "SELECT COUNT(*) FROM `users` WHERE access_status = 1;";
+$result = mysqli_query($conn, $query_admins);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $admin_count = $row['COUNT(*)'];
+}
+
 $query_orders = "SELECT COUNT(*) FROM `orders` WHERE status = 'В обработке';";
 $result = mysqli_query($conn, $query_orders);
 
@@ -132,6 +140,7 @@ mysqli_close($conn);
             echo "<div class='admin_block'>";
             echo "<p>Новые заказы:  $orders_count </p>";
             echo "<p>Клиенты: $users_count </p>";
+            echo "<p>Администраторы: $admin_count </p>";
             echo "<p>Всего заказов: $all_orders_count </p>";
             echo "</div>";
 
