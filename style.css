@@ -802,7 +802,7 @@ hr {
   width: 80%;
   background-color: #0d0d0d;
   border-radius: 10px;
-  height: 350px;
+  min-height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1307,6 +1307,28 @@ hr {
     margin-left: 0px;
   }
 
+  /* index */
+  .discount_cart_btn a {
+    font-size: 20px;
+  }
+  .discount_cart_img span {
+    font-size: 80px;
+  }
+  .more_benefit_title,
+  .use_cart_title {
+    font-size: 30px;
+  }
+
+  /* auth */
+  .input_text {
+    width: 70%;
+  }
+
+  /* registration */
+  .registration_block {
+    width: 70%;
+  }
+
   /* profile */
   .content_profile {
     flex-direction: column;
@@ -1316,7 +1338,7 @@ hr {
     margin-top: 40px;
     border-radius: 10px;
     width: 70%;
-    height: 40vh;
+    height: 50vh;
     margin-bottom: 10px;
   }
   .ava_img {
@@ -1350,6 +1372,15 @@ hr {
   .usermail_email,
   .usernumber_phone {
     font-size: 25px;
+  }
+  .profile_user_order {
+    width: 300px;
+  }
+
+  /* profile user */
+  .img_profile_card {
+    width: 40%;
+    margin-top: 20px;
   }
 
   /* admin_order */
@@ -1398,6 +1429,111 @@ hr {
   .quantity_basket_cart {
     font-size: 20px;
     width: 50px;
+  }
+  .submit_order_btn {
+    width: 400px;
+  }
+
+  /* catalog */
+  .content_catalog {
+    margin: 10px;
+    margin-top: 50px;
+  }
+  .cart_catalog {
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+
+  /* orders */
+  .card_order {
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (max-width: 999px) {
+  /* index */
+  .preview_block {
+    background: url(img/preview_block_back.svg) fixed;
+  }
+  .preview_cart_block {
+    flex-direction: column;
+    margin: 50px;
+  }
+  .preview_cart {
+    margin: 0 auto;
+  }
+  .img_profile_card {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .price_basket {
+    margin-top: 30px;
+  }
+  .price_basket p,
+  .price_basket span {
+    font-size: 45px;
+  }
+
+  .basket_cart {
+    display: grid;
+  }
+  .basket_cart_img {
+    margin: 0 auto;
+    margin-top: 25px;
+  }
+  .info_basket_cart {
+    flex-direction: column;
+    width: 90%;
+    gap: 25px;
+  }
+  .nametovar_basket {
+    font-size: 25px;
+    text-align: center;
+  }
+  .quantity_basket_cart {
+    width: 76px;
+  }
+  .fullprice_tovar {
+    font-size: 40px;
+  }
+  .delete_button {
+    margin-bottom: 25px;
+  }
+}
+
+@media only screen and (max-width: 860px) {
+  /* index */
+  .discount7 {
+    font-size: 5em;
+  }
+  .discount_cart_block {
+    flex-direction: column;
+    background: url(img/discount_cart_back.svg) fixed;
+    min-height: 500px;
+  }
+  .discount_cart {
+    margin: 0 auto;
+  }
+  .more_benefit_title {
+    margin: 0 auto;
+  }
+  .use_cart_title {
+    margin: 0 auto;
+  }
+
+  /* auth */
+  .auth_block {
+    width: 80%;
+  }
+  .input_text {
+    width: 80%;
+  }
+
+  /* registration */
+  .registration_block {
+    width: 90%;
   }
 }
 
@@ -1453,24 +1589,152 @@ hr {
   .select_filter_product {
     margin-top: 20px;
   }
+  .sort_order {
+    width: 50%;
+  }
+  .category_filter {
+    width: 50%;
+  }
+  .show_products {
+    width: 30%;
+  }
   .edit_product_card {
     display: grid;
     justify-content: center;
     text-align: center;
   }
   .edit_product_card-img {
-    width: 90%;
+    width: 100%;
   }
   .information_product_edit {
-    width: 90%;
+    width: 100%;
   }
   .info_product_block {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    width: 90%;
   }
   .control_block {
     flex-direction: row;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .delete_product_btn {
+    margin-bottom: 0px;
+  }
+
+  /* reviews */
+  .rewiews_block {
+    margin: 0 auto;
+    margin-bottom: 50px;
+  }
+  .input_rewiew {
+    width: 50%;
+  }
+
+  /* orders */
+
+  .card_order {
+    flex-direction: column-reverse;
+  }
+  .img_card_order {
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+  .info_card_order {
+    margin: 0 auto;
+    margin-top: 15px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  /* index */
+  .discount7 {
+    text-align: center;
+  }
+  .discount_cart {
+    gap: 0;
+  }
+  .home_discount_block span {
+    font-size: 15px;
+  }
+  .discount_cart_img {
+    display: grid;
+    gap: 0px;
+    margin: 0 auto;
+  }
+  .discount_cart_img img {
+    width: 90%;
+  }
+  .discount_cart_btn {
+    margin-top: 30px;
+  }
+  .discount_cart_btn a {
+    padding: 10px;
+  }
+
+  .adventure_cart h2 {
+    font-size: 30px;
+  }
+  .heading_text {
+    font-size: 2.5em;
+  }
+
+  /* category */
+  .heading_text_category {
+    margin: 0 auto;
+    font-size: 3em;
+  }
+}
+
+@media only screen and (max-width: 452px) {
+  .discount7 {
+    font-size: 2.5em;
+  }
+  .hello_block h2 {
+    font-size: 2em;
+    padding-top: 0 auto;
+  }
+  .hello_block p {
+    font-size: 1.4em;
+    margin: 36.5px;
+  }
+  .use_cart_title {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .discount_cart_img img {
+    width: 70%;
+    margin-bottom: 10px;
+  }
+  .discount_cart_img span {
+    font-size: 3em;
+  }
+  .more_benefit_title {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* reviews */
+  .rewiews_block {
+    width: 90%;
+  }
+  .title_write_rewiew {
+    font-size: 30px;
+  }
+  .write_rewiew_estimation p {
+    font-size: 25px;
+  }
+  #ratingList {
+    height: 30px;
+    font-size: 20px;
+  }
+  .submit_rewiew {
+    font-size: 25px;
   }
 }
