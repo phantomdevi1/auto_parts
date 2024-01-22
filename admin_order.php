@@ -75,11 +75,15 @@ if (isset($_POST['show_orders'])) {
         $total_price = $row['full_price'];
 
         $order_id = $row['order_id'];
-        $query_user = "SELECT user_name FROM users
+        $query_user = "SELECT user_name, user_phone, user_email FROM users
         WHERE ID = (SELECT user_id FROM orders WHERE order_id = $order_id)";
         $result_user = mysqli_query($conn, $query_user);
         $user_row = mysqli_fetch_assoc($result_user);
         $username = $user_row['user_name'];
+        $user_phone = $user_row['user_phone'];
+        $user_email = $user_row['user_email'];
+
+        
 
         $query_items = "SELECT order_items.*, product.*
         FROM order_items
@@ -93,7 +97,7 @@ if (isset($_POST['show_orders'])) {
         echo '<div class="info_card_order">';
         echo '<div><p>' . $order_date . '</p></div>';
         echo '<div><p>Номер заказа:</p><span>' . $order_id . '</span></div>';
-        echo '<div><p>Заказчик:</p><span>' . $username . '</span></div>';
+        echo '<div><p>Заказчик:</p><span  class="adminorder_customer" onclick="showCustomerInfo(\'' . $username . '\', \'' . $order_id . '\', \'' . $user_phone . '\', \'' . $user_email . '\')">' . $username . '</span></div>';
         echo '<div><p>Статус:</p><span>' . $status . '</span></div>';
         echo '<div><p>Общая стоимость:</p><span>' . $total_price . ' ₽</span></div>';
         while ($item_row = mysqli_fetch_assoc($result_items)) {
@@ -146,11 +150,14 @@ if (isset($_POST['given'])) {
 
 mysqli_close($conn);
 ?>
-
-
-
-
-
     </div>
+
+    <script>
+          function showCustomerInfo(username, order_id, user_phone, user_email) {
+            // Вывод информации о заказчике в alert
+            alert(`Имя заказчика: ${username}\nНомер телефона: ${user_phone}\nEmail: ${user_email}\nНомер заказа: ${order_id}`);
+            // Дополнительная логика, если необходимо
+        }
+    </script>
 </body>
 </html>
