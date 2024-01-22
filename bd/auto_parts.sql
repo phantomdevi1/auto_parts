@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Янв 17 2024 г., 17:24
+-- Время создания: Янв 22 2024 г., 15:40
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -82,7 +82,8 @@ INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status`, `full_price
 (33, 1, '2023-12-12 20:31:52', 'В сборке', 1242),
 (34, 1, '2024-01-12 10:41:44', 'В обработке', 51167),
 (36, 1, '2024-01-12 13:54:06', 'Готов к выдаче', 79045),
-(38, 7, '2024-01-15 13:27:22', 'Выдан', 8500);
+(38, 7, '2024-01-15 13:27:22', 'Выдан', 8500),
+(39, 1, '2024-01-22 11:59:59', 'В обработке', 958079);
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,10 @@ INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `quantity`) VALU
 (49, 36, 5, 1),
 (50, 36, 29, 1),
 (51, 36, 28, 1),
-(53, 38, 2, 1);
+(53, 38, 2, 1),
+(54, 39, 12, 1),
+(55, 39, 11, 9),
+(56, 39, 12, 100);
 
 -- --------------------------------------------------------
 
@@ -128,50 +132,51 @@ CREATE TABLE `product` (
   `description` text,
   `price` decimal(10,2) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `category` int DEFAULT NULL
+  `category` int DEFAULT NULL,
+  `quantity_warehouse` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `product`
 --
 
-INSERT INTO `product` (`ID`, `name`, `description`, `price`, `image`, `category`) VALUES
-(1, 'FR Replica FR 630', 'Диски Replica FR 630 R14x5.5 5x105 ET39 изготовлены из алюминия, имеют черный матовый цвет. Размеры: R14x5.5, разболтовка 5x105, вылет ET39.', '7990.00', 'img/product/disk_FR_630.jpg', 2),
-(2, 'Another Disk Model', 'Дополнительное описание другой модели дисков: материал, размеры, стиль и т.д.', '8500.00', 'img/product/another_disk_model.jpg', 2),
-(3, 'Third Disk Model', 'Описание третьей модели дисков: материал, размеры, стиль и т.д.', '7500.00', 'img/product/third_disk_model.jpg', 2),
-(4, 'Superior Wheels', 'Диски Superior Wheels с уникальным дизайном и высоким качеством изготовления.', '9200.00', 'img/product/superior_wheels.jpg', 2),
-(5, 'Performance Rims', 'Производительные диски Performance Rims для повышения эстетики и характеристик вашего автомобиля.', '8800.00', 'img/product/performance_rims.jpg', 2),
-(6, 'Castrol EDGE 5W-30', 'Синтетическое моторное масло Castrol EDGE 5W-30 обеспечивает надежную защиту двигателя и повышенную производительность.', '990.00', 'img/product/castrol_edge_5w30.jpg', 3),
-(8, 'Shell Helix Ultra 5W-40', 'Синтетическое моторное масло Shell Helix Ultra 5W-40 обеспечивает отличную защиту и чистоту двигателя.', '750.00', 'img/product/shell_helix_5w40.jpg', 3),
-(9, 'Bosch Oil Filter P 9251', 'Масляный фильтр Bosch P 9251 обеспечивает надежную фильтрацию масла и защиту двигателя от загрязнений.', '280.00', 'img/product/bosch_p9251.jpg', 3),
-(10, 'MANN-FILTER WK 820/2', 'Топливный фильтр MANN-FILTER WK 820/2 обеспечивает чистоту топлива, защищает инжектор и систему питания.', '180.00', 'img/product/mann_filter_wk8202.jpg', 3),
-(11, 'Michelin Pilot Sport 4', 'Высокопроизводительные шины Michelin Pilot Sport 4 с отличным сцеплением на сухих и мокрых дорогах.', '10990.00', 'img/product/michelin_pilot_sport4.jpg', 1),
-(12, 'Continental ContiPremiumContact 5', 'Летние шины Continental ContiPremiumContact 5 обеспечивают комфортную и безопасную езду.', '8800.00', 'img/product/continental_contipremiumcontact5.jpg', 1),
-(13, 'Nokian Hakkapeliitta 10', 'Зимние шины Nokian Hakkapeliitta 10 обеспечивают отличное сцепление на скользких дорогах.', '9800.00', 'img/product/nokian_hakkapeliitta10.jpg', 1),
-(14, 'Pirelli P Zero', 'Шины Pirelli P Zero предназначены для высоких скоростей и улучшенного сцепления.', '8500.00', 'img/product/pirelli_pzero.jpg', 1),
-(15, 'Bridgestone Turanza T005', 'Летние шины Bridgestone Turanza T005 обеспечивают хорошую управляемость и сцепление.', '9200.00', 'img/product/bridgestone_turanza_t005.jpg', 1),
-(22, 'Brembo Тормозные колодки', 'Высококачественные тормозные колодки от Brembo для надежного и эффективного торможения.', '5999.99', 'img/product/brembo_brake_pads.jpg', 4),
-(23, 'TRW Тормозные диски', 'Прочные тормозные диски от TRW, обеспечивающие стабильную тормозную эффективность.', '8999.99', 'img/product/trw_brake_discs.jpg', 4),
-(24, 'ATE Тормозной масляный бак', 'Оригинальный тормозной масляный бак от ATE для надежной работы тормозной системы.', '2499.99', 'img/product/ate_brake_reservoir.jpg', 4),
-(25, 'Ferodo Тормозные колодки', 'Продвинутые тормозные колодки Ferodo обеспечивают отличную тормозную эффективность.', '4999.99', 'img/product/ferodo_brake_pads.jpg', 4),
-(26, 'Bosch Тормозные диски', 'Тормозные диски от Bosch совмещают надежность и высокую степень тормозной эффективности.', '7999.99', 'img/product/bosch_brake_discs.jpg', 4),
-(27, 'ATE Тормозные шланги', 'Гибкие и надежные тормозные шланги ATE для обеспечения безопасности в тормозной системе.', '2999.99', 'img/product/ate_brake_hoses.jpg', 4),
-(28, 'Bosch Аккумулятор S4', 'Надежный аккумулятор от Bosch, серии S4, обеспечивает стабильный запуск двигателя.', '4999.99', 'img/product/bosch_battery_s4.jpg', 5),
-(29, 'Varta Silver Dynamic Аккумулятор', 'Продвинутый аккумулятор Varta Silver Dynamic для автомобилей с высокими энергозатратами.', '6999.99', 'img/product/varta_battery_silver_dynamic.jpg', 5),
-(30, 'Exide Premium Аккумулятор', 'Используйте Exide Premium для надежной работы электроники и старта двигателя.', '5699.99', 'img/product/exide_battery_premium.jpg', 5),
-(31, 'Bosch Аккумулятор S5', 'Профессиональный аккумулятор Bosch S5 с высокой емкостью для большого запаса энергии.', '7999.99', 'img/product/bosch_battery_s5.jpg', 5),
-(32, 'Varta Blue Dynamic Аккумулятор', 'Экономичный и надежный аккумулятор Varta Blue Dynamic для разнообразных автомобилей.', '4499.99', 'img/product/varta_battery_blue_dynamic.jpg', 5),
-(33, 'Exide Excell Аккумулятор', 'Универсальный аккумулятор Exide Excell для надежного и долговечного использования.', '5199.99', 'img/product/exide_battery_excell.jpg', 5),
-(34, 'Mann-Filter Воздушный фильтр', 'Оригинальный воздушный фильтр Mann-Filter для эффективной фильтрации воздуха.', '799.99', 'img/product/mann_filter_air_filter.jpg', 6),
-(35, 'Bosch Воздушный фильтр', 'Bosch представляет высококачественный воздушный фильтр для оптимальной чистоты воздуха.', '899.99', 'img/product/bosch_air_filter.jpg', 6),
-(36, 'K&N Повторно используемый воздушный фильтр', 'K&N предлагает повторно используемый воздушный фильтр для улучшенной производительности.', '1299.99', 'img/product/kn_reusable_air_filter.jpg', 6),
-(37, 'Mahle Воздушный фильтр', 'Mahle предоставляет воздушный фильтр высокого качества для эффективной фильтрации воздуха.', '749.99', 'img/product/mahle_air_filter.jpg', 6),
-(38, 'Fram Экстра Гвард Воздушный фильтр', 'Fram предлагает воздушный фильтр Extra Guard для защиты двигателя от загрязнений.', '599.99', 'img/product/fram_extra_guard_air_filter.jpg', 6),
-(39, 'Hengst Воздушный фильтр', 'Hengst представляет надежный воздушный фильтр для обеспечения чистого воздуха в двигателе.', '679.99', 'img/product/hengst_air_filter.jpg', 6),
-(41, 'Valvoline Моторное масло', 'Valvoline - высококачественное моторное масло для долговечной работы двигателя.', '999.99', 'img/product/valvoline_motor_oil.jpg', 3),
-(42, 'WIX Масляный фильтр', 'WIX предлагает прочный масляный фильтр для оптимальной защиты двигателя.', '299.99', 'img/product/wix_oil_filter.jpg', 3),
-(43, 'Continental ContiPremiumContact 6', 'Continental ContiPremiumContact 6 - летние шины с отличным сцеплением и комфортной ездой.', '10000.99', 'img/product/continental_contipremiumcontact_6.jpg', 1),
-(44, 'Enkei Raijin', 'Enkei Raijin - стильные и легкие автомобильные диски с уникальным дизайном.', '12999.99', 'img/product/enkei_raijin_wheel.jpg', 2);
+INSERT INTO `product` (`ID`, `name`, `description`, `price`, `image`, `category`, `quantity_warehouse`) VALUES
+(1, 'FR Replica FR 630', 'Диски Replica FR 630 R14x5.5 5x105 ET39 изготовлены из алюминия, имеют черный матовый цвет. Размеры: R14x5.5, разболтовка 5x105, вылет ET39.', '7990.00', 'img/product/disk_FR_630.jpg', 2, 3),
+(2, 'Another Disk Model', 'Дополнительное описание другой модели дисков: материал, размеры, стиль и т.д.', '8500.00', 'img/product/another_disk_model.jpg', 2, 10),
+(3, 'Third Disk Model', 'Описание третьей модели дисков: материал, размеры, стиль и т.д.', '7500.00', 'img/product/third_disk_model.jpg', 2, 11),
+(4, 'Superior Wheels', 'Диски Superior Wheels с уникальным дизайном и высоким качеством изготовления.', '9200.00', 'img/product/superior_wheels.jpg', 2, 10),
+(5, 'Performance Rims', 'Производительные диски Performance Rims для повышения эстетики и характеристик вашего автомобиля.', '8800.00', 'img/product/performance_rims.jpg', 2, 10),
+(6, 'Castrol EDGE 5W-30', 'Синтетическое моторное масло Castrol EDGE 5W-30 обеспечивает надежную защиту двигателя и повышенную производительность.', '990.00', 'img/product/castrol_edge_5w30.jpg', 3, 10),
+(8, 'Shell Helix Ultra 5W-40', 'Синтетическое моторное масло Shell Helix Ultra 5W-40 обеспечивает отличную защиту и чистоту двигателя.', '750.00', 'img/product/shell_helix_5w40.jpg', 3, 10),
+(9, 'Bosch Oil Filter P 9251', 'Масляный фильтр Bosch P 9251 обеспечивает надежную фильтрацию масла и защиту двигателя от загрязнений.', '280.00', 'img/product/bosch_p9251.jpg', 3, 10),
+(10, 'MANN-FILTER WK 820/2', 'Топливный фильтр MANN-FILTER WK 820/2 обеспечивает чистоту топлива, защищает инжектор и систему питания.', '180.00', 'img/product/mann_filter_wk8202.jpg', 3, 10),
+(11, 'Michelin Pilot Sport 4', 'Высокопроизводительные шины Michelin Pilot Sport 4 с отличным сцеплением на сухих и мокрых дорогах.', '10990.00', 'img/product/michelin_pilot_sport4.jpg', 1, 1),
+(12, 'Continental ContiPremiumContact 5', 'Летние шины Continental ContiPremiumContact 5 обеспечивают комфортную и безопасную езду.', '8800.00', 'img/product/continental_contipremiumcontact5.jpg', 1, 0),
+(13, 'Nokian Hakkapeliitta 10', 'Зимние шины Nokian Hakkapeliitta 10 обеспечивают отличное сцепление на скользких дорогах.', '9800.00', 'img/product/nokian_hakkapeliitta10.jpg', 1, 10),
+(14, 'Pirelli P Zero', 'Шины Pirelli P Zero предназначены для высоких скоростей и улучшенного сцепления.', '8500.00', 'img/product/pirelli_pzero.jpg', 1, 10),
+(15, 'Bridgestone Turanza T005', 'Летние шины Bridgestone Turanza T005 обеспечивают хорошую управляемость и сцепление.', '9200.00', 'img/product/bridgestone_turanza_t005.jpg', 1, 10),
+(22, 'Brembo Тормозные колодки', 'Высококачественные тормозные колодки от Brembo для надежного и эффективного торможения.', '5999.99', 'img/product/brembo_brake_pads.jpg', 4, 10),
+(23, 'TRW Тормозные диски', 'Прочные тормозные диски от TRW, обеспечивающие стабильную тормозную эффективность.', '8999.99', 'img/product/trw_brake_discs.jpg', 4, 10),
+(24, 'ATE Тормозной масляный бак', 'Оригинальный тормозной масляный бак от ATE для надежной работы тормозной системы.', '2499.99', 'img/product/ate_brake_reservoir.jpg', 4, 10),
+(25, 'Ferodo Тормозные колодки', 'Продвинутые тормозные колодки Ferodo обеспечивают отличную тормозную эффективность.', '4999.99', 'img/product/ferodo_brake_pads.jpg', 4, 10),
+(26, 'Bosch Тормозные диски', 'Тормозные диски от Bosch совмещают надежность и высокую степень тормозной эффективности.', '7999.99', 'img/product/bosch_brake_discs.jpg', 4, 10),
+(27, 'ATE Тормозные шланги', 'Гибкие и надежные тормозные шланги ATE для обеспечения безопасности в тормозной системе.', '2999.99', 'img/product/ate_brake_hoses.jpg', 4, 10),
+(28, 'Bosch Аккумулятор S4', 'Надежный аккумулятор от Bosch, серии S4, обеспечивает стабильный запуск двигателя.', '4999.99', 'img/product/bosch_battery_s4.jpg', 5, 10),
+(29, 'Varta Silver Dynamic Аккумулятор', 'Продвинутый аккумулятор Varta Silver Dynamic для автомобилей с высокими энергозатратами.', '6999.99', 'img/product/varta_battery_silver_dynamic.jpg', 5, 10),
+(30, 'Exide Premium Аккумулятор', 'Используйте Exide Premium для надежной работы электроники и старта двигателя.', '5699.99', 'img/product/exide_battery_premium.jpg', 5, 10),
+(31, 'Bosch Аккумулятор S5', 'Профессиональный аккумулятор Bosch S5 с высокой емкостью для большого запаса энергии.', '7999.99', 'img/product/bosch_battery_s5.jpg', 5, 10),
+(32, 'Varta Blue Dynamic Аккумулятор', 'Экономичный и надежный аккумулятор Varta Blue Dynamic для разнообразных автомобилей.', '4499.99', 'img/product/varta_battery_blue_dynamic.jpg', 5, 10),
+(33, 'Exide Excell Аккумулятор', 'Универсальный аккумулятор Exide Excell для надежного и долговечного использования.', '5199.99', 'img/product/exide_battery_excell.jpg', 5, 10),
+(34, 'Mann-Filter Воздушный фильтр', 'Оригинальный воздушный фильтр Mann-Filter для эффективной фильтрации воздуха.', '799.99', 'img/product/mann_filter_air_filter.jpg', 6, 10),
+(35, 'Bosch Воздушный фильтр', 'Bosch представляет высококачественный воздушный фильтр для оптимальной чистоты воздуха.', '899.99', 'img/product/bosch_air_filter.jpg', 6, 10),
+(36, 'K&N Повторно используемый воздушный фильтр', 'K&N предлагает повторно используемый воздушный фильтр для улучшенной производительности.', '1299.99', 'img/product/kn_reusable_air_filter.jpg', 6, 10),
+(37, 'Mahle Воздушный фильтр', 'Mahle предоставляет воздушный фильтр высокого качества для эффективной фильтрации воздуха.', '749.99', 'img/product/mahle_air_filter.jpg', 6, 10),
+(38, 'Fram Экстра Гвард Воздушный фильтр', 'Fram предлагает воздушный фильтр Extra Guard для защиты двигателя от загрязнений.', '599.99', 'img/product/fram_extra_guard_air_filter.jpg', 6, 10),
+(39, 'Hengst Воздушный фильтр', 'Hengst представляет надежный воздушный фильтр для обеспечения чистого воздуха в двигателе.', '679.99', 'img/product/hengst_air_filter.jpg', 6, 10),
+(41, 'Valvoline Моторное масло', 'Valvoline - высококачественное моторное масло для долговечной работы двигателя.', '999.99', 'img/product/valvoline_motor_oil.jpg', 3, 10),
+(42, 'WIX Масляный фильтр', 'WIX предлагает прочный масляный фильтр для оптимальной защиты двигателя.', '299.99', 'img/product/wix_oil_filter.jpg', 3, 10),
+(43, 'Continental ContiPremiumContact 6', 'Continental ContiPremiumContact 6 - летние шины с отличным сцеплением и комфортной ездой.', '10000.99', 'img/product/continental_contipremiumcontact_6.jpg', 1, 10),
+(44, 'Enkei Raijin', 'Enkei Raijin - стильные и легкие автомобильные диски с уникальным дизайном.', '12999.99', 'img/product/enkei_raijin_wheel.jpg', 2, 10);
 
 -- --------------------------------------------------------
 
@@ -217,7 +222,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `user_email`, `user_phone`, `user_name`, `user_password`, `access_status`, `discount_card`) VALUES
 (1, 'admin@mail.ru', '88888888888', 'admin', 'admin', 1, 1),
-(7, 'qwerty@mail.ru', '89963214528', 'qwerty@mail.ru', '1234', 0, 0);
+(7, 'qwerty@mail.ru', '89963214528', 'qwerty@mail.ru', '1234', 0, 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -279,7 +284,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -291,19 +296,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT для таблицы `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
