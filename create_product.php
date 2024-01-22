@@ -54,6 +54,7 @@
                     }
                     ?>
                 </select>
+                <input type="number" name="quantity_product" class="add_product_price" id="" placeholder="Количество товара на складе">
                 <input type="number" placeholder="Стоимость товара за шт." name="add_price" class="add_product_price" />
                 <textarea id="" cols="30" rows="10" name="description_product" class="add_description_product"
                     placeholder="Описание товара"></textarea>
@@ -68,14 +69,15 @@
             $imagePath = $targetFile;
             $productName = $_POST['name_product'];
             $productCategory = $_POST['category'];
+            $productQuantity = $_POST['quantity_product'];
             $productPrice = $_POST['add_price'];
             $productDescription = $_POST['description_product'];
 
             // Проверка на пустые поля
-            if (empty($productName) || empty($productCategory) || empty($productPrice) || empty($productDescription) || empty($imagePath)) {
+            if (empty($productName) || empty($productCategory) || empty($productQuantity) || empty($productPrice) || empty($productDescription) || empty($imagePath)) {
                 echo "<script>alert('Пожалуйста, заполните все поля.')</script>";
             } else {
-                $sql = "INSERT INTO product (name, description, price, image, category) VALUES ('$productName', '$productDescription', '$productPrice', '$imagePath', '$productCategory')";
+                $sql = "INSERT INTO product (name, description, price, image, category, quantity_warehouse) VALUES ('$productName', '$productDescription', '$productPrice', '$imagePath', '$productCategory', '$productQuantity')";
 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Товар успешно добавлен в базу данных.')</script>";
