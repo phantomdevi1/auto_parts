@@ -184,6 +184,7 @@ mysqli_close($conn);
                 echo "<a href='admin_order.php'><img src='img/order_admin_icon.svg' width='90%'></a>";
                 echo "<a href='create_product.php'><img src='img/add_tovar_icon.svg' width='90%'></a>";
                 echo "<a href='edit_product.php'><img src='img/edit_tovar_icon.svg' width='90%'></a>";
+                echo "<a href='product_accounting.php'><img src='img/accounting_product.svg' width='90%'></a>";
             }
             else{
                 echo "<a href='orders.php'><img src='img/actual_order.svg' alt='заказы' class='profile_user_order' width='90%'></a>";

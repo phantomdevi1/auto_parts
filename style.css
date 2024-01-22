@@ -455,7 +455,7 @@ label {
   width: 30%;
   background-color: #f26419;
   border-radius: 10px 0 0 10px;
-  height: 90vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -527,7 +527,7 @@ label {
   width: 70%;
   background-color: #f6ae2d;
   border-radius: 0 10px 10px 0;
-  height: 90vh;
+  min-height: 90vh;
 }
 .profile_block_right p {
   font-size: 50px;
@@ -565,6 +565,7 @@ hr {
 
 .order_profile {
   display: flex;
+  flex-wrap: wrap;
   margin: 5%;
 }
 .order_profile a:hover {
@@ -640,6 +641,9 @@ hr {
   white-space: nowrap; /* Запрет на перенос текста на новую строку */
   overflow: hidden; /* Скрытие части текста, выходящей за границы блока */
   text-overflow: ellipsis; /* Замена скрытой части текста на многоточие */
+}
+.category_quantity_warehouse {
+  margin-left: 0px;
 }
 .quantity_category {
   width: 50px;
@@ -1067,6 +1071,14 @@ hr {
   color: #888888;
   margin-right: 1%;
   cursor: pointer;
+}
+.adminorder_customer {
+  cursor: pointer;
+  color: #1c59bb;
+  text-decoration: underline;
+}
+.adminorder_customer:hover{
+  color: #0062ff;
 }
 .status_order_input {
   margin-bottom: 50px;
